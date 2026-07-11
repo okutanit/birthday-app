@@ -141,8 +141,13 @@ function createConfetti(pieceCount = 90) {
     "#ff7f9f"
   ];
 
-  for (let index = 0; index < pieceCount; index += 1) {
-    const piece = document.createElement("span");
+  for (
+    let index = 0;
+    index < pieceCount;
+    index += 1
+  ) {
+    const piece =
+      document.createElement("span");
 
     piece.className = "confetti";
 
@@ -403,7 +408,9 @@ function stopMicrophone() {
 
 
 async function openGift() {
-  if (giftBox.classList.contains("opened")) {
+  if (
+    giftBox.classList.contains("opened")
+  ) {
     return;
   }
 
@@ -425,11 +432,23 @@ function addRose() {
     return;
   }
 
- const rose = document.createElement("img");
+  const rose =
+    document.createElement("img");
 
- rose.className = "rose";
- rose.src = "images/rose.png";
- rose.alt = "赤いバラ";
+  rose.className = "rose";
+  rose.src = "images/rose.png";
+  rose.alt =
+    `${currentRoseCount + 1}本目の赤いバラ`;
+
+  rose.onerror = () => {
+    const fallback =
+      document.createElement("span");
+
+    fallback.className = "rose rose-fallback";
+    fallback.textContent = "🌹";
+
+    rose.replaceWith(fallback);
+  };
 
   roseGarden.appendChild(rose);
 
