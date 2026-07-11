@@ -1,51 +1,113 @@
 const screens = {
-  start: document.getElementById("startScreen"),
-  countdown: document.getElementById("countdownScreen"),
+  opening: document.getElementById("openingScreen"),
   cake: document.getElementById("cakeScreen"),
-  result: document.getElementById("resultScreen")
+  gift: document.getElementById("giftScreen"),
+  rose: document.getElementById("roseScreen"),
+  bouquet: document.getElementById("bouquetScreen"),
+  photo: document.getElementById("photoScreen"),
+  final: document.getElementById("finalScreen"),
+  credit: document.getElementById("creditScreen"),
+  letter: document.getElementById("letterScreen"),
+  message: document.getElementById("messageScreen")
 };
 
 const startButton = document.getElementById("startButton");
-const countdownNumber = document.getElementById("countdownNumber");
 
-const cake = document.getElementById("cake");
+const cakeArea = document.getElementById("cakeArea");
+const cakeTapButton = document.getElementById("cakeTapButton");
 const microphoneButton =
   document.getElementById("microphoneButton");
-const tapButton =
-  document.getElementById("tapButton");
+const cakeInstruction =
+  document.getElementById("cakeInstruction");
+const meterFill = document.getElementById("meterFill");
+const meterText = document.getElementById("meterText");
 
-const instructionText =
-  document.getElementById("instructionText");
-const meterFill =
-  document.getElementById("meterFill");
-const meterText =
-  document.getElementById("meterText");
+const giftBox = document.getElementById("giftBox");
+const giftMessage = document.getElementById("giftMessage");
 
-const replayButton =
-  document.getElementById("replayButton");
+const roseGarden = document.getElementById("roseGarden");
+const roseCount = document.getElementById("roseCount");
+const roseMessage = document.getElementById("roseMessage");
+const addRoseButton = document.getElementById("addRoseButton");
+
+const photoButton = document.getElementById("photoButton");
+const memoryPhoto = document.getElementById("memoryPhoto");
+const photoCaption = document.getElementById("photoCaption");
+const photoProgress = document.getElementById("photoProgress");
+const nextPhotoButton =
+  document.getElementById("nextPhotoButton");
+
+const creditButton = document.getElementById("creditButton");
+const envelope = document.getElementById("envelope");
+const replayButton = document.getElementById("replayButton");
 
 let audioContext = null;
 let analyser = null;
 let microphoneStream = null;
-let animationFrameId = null;
+let microphoneAnimationId = null;
 
 let candlesAreOut = false;
 let microphoneStarted = false;
+let blowFrameCount = 0;
 
-/*
-  息の検知感度。
-  小さくすると消えやすく、
-  大きくすると強く吹く必要があります。
-*/
-const BLOW_THRESHOLD = 20;
+let currentRoseCount = 0;
+let currentPhotoIndex = 0;
 
-/*
-  一瞬の大きな音だけで消えにくくするため、
-  連続してしきい値を超えた回数を数えます。
-*/
+const BLOW_THRESHOLD = 17;
 const REQUIRED_BLOW_FRAMES = 5;
 
-let blowFrameCount = 0;
+const roseMessages = [
+  "笑顔がかわいいところ",
+  "一緒にいると楽しいところ",
+  "優しいところ",
+  "頑張り屋なところ",
+  "よく笑ってくれるところ",
+  "一緒にいると落ち着くところ",
+  "話を聞いてくれるところ",
+  "素直なところ",
+  "美味しそうに食べるところ",
+  "照れた顔がかわいいところ",
+  "自分のことを大切にしてくれるところ",
+  "お出かけを楽しんでくれるところ",
+  "何気ない時間も楽しくしてくれるところ",
+  "かわいい声",
+  "一緒に笑えるところ",
+  "一緒にいると安心できるところ",
+  "思いやりがあるところ",
+  "会える日を楽しみにしてくれるところ",
+  "頑張っている姿",
+  "自分らしくいてくれるところ",
+  "一緒に思い出を作ってくれるところ",
+  "どんな時もかわいいところ",
+  "一緒にいる未来を想像できるところ",
+  "出会ってくれたこと",
+  "好きになってくれたこと",
+  "いつもそばにいてくれること",
+  "生まれてきてくれてありがとう"
+];
+
+const photos = [
+  {
+    src: "images/photo1.jpg",
+    caption: "一緒に過ごした大切な時間"
+  },
+  {
+    src: "images/photo2.jpg",
+    caption: "何気ない一日も、特別な思い出"
+  },
+  {
+    src: "images/photo3.jpg",
+    caption: "これからもいろんな場所へ行こうね"
+  },
+  {
+    src: "images/photo4.jpg",
+    caption: "一緒に笑えることが幸せです"
+  },
+  {
+    src: "images/photo5.jpg",
+    caption: "これからもたくさん思い出作ろうね"
+  }
+];
 
 
 function showScreen(screenName) {
@@ -54,6 +116,11 @@ function showScreen(screenName) {
   });
 
   screens[screenName].classList.add("active");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
 
@@ -64,21 +131,64 @@ function wait(milliseconds) {
 }
 
 
-async function startBirthdayExperience() {
+function createConfetti(pieceCount = 90) {
+  const colors = [
+    "#ec4899",
+    "#c65bd4",
+    "#f6c453",
+    "#65a8ff",
+    "#54cf9e",
+    "#ff7f9f"
+  ];
+
+  for (let index = 0; index < pieceCount; index += 1) {
+    const piece = document.createElement("span");
+
+    piece.className = "confetti";
+
+    piece.style.left =
+      `${Math.random() * 100}vw`;
+
+    piece.style.backgroundColor =
+      colors[
+        Math.floor(
+          Math.random() * colors.length
+        )
+      ];
+
+    piece.style.animationDuration =
+      `${2.8 + Math.random() * 2.6}s`;
+
+    piece.style.animationDelay =
+      `${Math.random() * 0.7}s`;
+
+    piece.style.setProperty(
+      "--drift",
+      `${-130 + Math.random() * 260}px`
+    );
+
+    document.body.appendChild(piece);
+
+    window.setTimeout(() => {
+      piece.remove();
+    }, 6500);
+  }
+}
+
+
+async function startExperience() {
   startButton.disabled = true;
 
-  showScreen("countdown");
+  startButton.textContent =
+    "準備しています…";
 
-  const countdownValues = ["3", "2", "1", "🎂"];
-
-  for (const value of countdownValues) {
-    countdownNumber.textContent = value;
-    await wait(850);
-  }
+  await wait(900);
 
   showScreen("cake");
 
   startButton.disabled = false;
+  startButton.textContent =
+    "物語を始める ▶";
 }
 
 
@@ -92,16 +202,18 @@ async function startMicrophone() {
     !navigator.mediaDevices.getUserMedia
   ) {
     meterText.textContent =
-      "このブラウザではマイクを利用できません";
+      "このブラウザではマイクを使えません";
 
-    instructionText.innerHTML =
-      "ケーキをタップして<br>ロウソクを消してね";
+    cakeInstruction.innerHTML =
+      "ケーキをタップして<br>" +
+      "ロウソクを消してね";
 
     return;
   }
 
   microphoneButton.disabled = true;
-  microphoneButton.textContent = "マイクを準備中…";
+  microphoneButton.textContent =
+    "マイクを準備中…";
 
   try {
     microphoneStream =
@@ -131,7 +243,7 @@ async function startMicrophone() {
     analyser = audioContext.createAnalyser();
 
     analyser.fftSize = 2048;
-    analyser.smoothingTimeConstant = 0.25;
+    analyser.smoothingTimeConstant = 0.2;
 
     source.connect(analyser);
 
@@ -143,10 +255,6 @@ async function startMicrophone() {
     meterText.textContent =
       "iPhoneに向かって、ふーっとしてね";
 
-    instructionText.innerHTML =
-      "願いごとをしたら、<br>" +
-      "iPhoneに向かって「ふーっ」としてね";
-
     monitorMicrophone();
 
   } catch (error) {
@@ -157,12 +265,12 @@ async function startMicrophone() {
 
     microphoneButton.disabled = false;
     microphoneButton.textContent =
-      "🎤 もう一度マイクを試す";
+      "🎤 もう一度試す";
 
     meterText.textContent =
       "マイクを使えませんでした";
 
-    instructionText.innerHTML =
+    cakeInstruction.innerHTML =
       "マイクを許可するか、<br>" +
       "ケーキをタップして消してね";
   }
@@ -170,21 +278,14 @@ async function startMicrophone() {
 
 
 function monitorMicrophone() {
-  if (
-    !analyser ||
-    candlesAreOut
-  ) {
+  if (!analyser || candlesAreOut) {
     return;
   }
 
   const dataArray =
-    new Uint8Array(
-      analyser.fftSize
-    );
+    new Uint8Array(analyser.fftSize);
 
-  analyser.getByteTimeDomainData(
-    dataArray
-  );
+  analyser.getByteTimeDomainData(dataArray);
 
   let sumOfSquares = 0;
 
@@ -193,12 +294,11 @@ function monitorMicrophone() {
     index < dataArray.length;
     index += 1
   ) {
-    const normalizedValue =
+    const normalized =
       (dataArray[index] - 128) / 128;
 
     sumOfSquares +=
-      normalizedValue *
-      normalizedValue;
+      normalized * normalized;
   }
 
   const rootMeanSquare =
@@ -207,16 +307,16 @@ function monitorMicrophone() {
       dataArray.length
     );
 
-  const volumeLevel =
+  const volume =
     Math.min(
       100,
-      rootMeanSquare * 240
+      rootMeanSquare * 260
     );
 
   meterFill.style.width =
-    `${volumeLevel}%`;
+    `${volume}%`;
 
-  if (volumeLevel >= BLOW_THRESHOLD) {
+  if (volume >= BLOW_THRESHOLD) {
     blowFrameCount += 1;
 
     meterText.textContent =
@@ -239,7 +339,7 @@ function monitorMicrophone() {
     return;
   }
 
-  animationFrameId =
+  microphoneAnimationId =
     requestAnimationFrame(
       monitorMicrophone
     );
@@ -253,31 +353,32 @@ async function blowOutCandles() {
 
   candlesAreOut = true;
 
-  cake.classList.add("blown-out");
+  cakeArea.classList.add("blown-out");
 
   meterFill.style.width = "100%";
   meterText.textContent =
     "ロウソクが消えたよ！ 🎉";
 
   microphoneButton.disabled = true;
-  tapButton.disabled = true;
+  cakeTapButton.disabled = true;
 
   stopMicrophone();
 
-  await wait(900);
-
-  showScreen("result");
   createConfetti();
+
+  await wait(1600);
+
+  showScreen("gift");
 }
 
 
 function stopMicrophone() {
-  if (animationFrameId) {
+  if (microphoneAnimationId) {
     cancelAnimationFrame(
-      animationFrameId
+      microphoneAnimationId
     );
 
-    animationFrameId = null;
+    microphoneAnimationId = null;
   }
 
   if (microphoneStream) {
@@ -291,9 +392,7 @@ function stopMicrophone() {
   }
 
   if (audioContext) {
-    audioContext.close().catch(() => {
-      // 終了時のエラーは無視します。
-    });
+    audioContext.close().catch(() => {});
 
     audioContext = null;
   }
@@ -303,90 +402,200 @@ function stopMicrophone() {
 }
 
 
-function createConfetti() {
-  const confettiColors = [
-    "#ec4899",
-    "#c026d3",
-    "#fbbf24",
-    "#60a5fa",
-    "#34d399",
-    "#fb7185"
-  ];
+async function openGift() {
+  if (giftBox.classList.contains("opened")) {
+    return;
+  }
 
-  const numberOfPieces = 90;
+  giftBox.classList.add("opened");
 
-  for (
-    let index = 0;
-    index < numberOfPieces;
-    index += 1
-  ) {
-    const piece =
-      document.createElement("span");
+  giftMessage.textContent =
+    "まだプレゼントは続きます… 🌹";
 
-    piece.className =
-      "confetti-piece";
+  createConfetti(45);
 
-    piece.style.left =
-      `${Math.random() * 100}vw`;
+  await wait(1900);
 
-    piece.style.background =
-      confettiColors[
-        Math.floor(
-          Math.random() *
-          confettiColors.length
-        )
-      ];
+  showScreen("rose");
+}
 
-    piece.style.animationDuration =
-      `${2.6 + Math.random() * 2.4}s`;
 
-    piece.style.animationDelay =
-      `${Math.random() * 0.7}s`;
+function addRose() {
+  if (currentRoseCount >= 27) {
+    return;
+  }
 
-    piece.style.setProperty(
-      "--drift",
-      `${-120 + Math.random() * 240}px`
-    );
+  const rose = document.createElement("span");
 
-    document.body.appendChild(piece);
+  rose.className = "rose";
+  rose.textContent = "🌹";
+
+  roseGarden.appendChild(rose);
+
+  currentRoseCount += 1;
+
+  roseCount.textContent =
+    `${currentRoseCount} / 27`;
+
+  roseMessage.textContent =
+    roseMessages[currentRoseCount - 1];
+
+  if (currentRoseCount === 27) {
+    addRoseButton.disabled = true;
+
+    addRoseButton.textContent =
+      "27本のバラがそろいました 💖";
+
+    createConfetti(80);
 
     window.setTimeout(() => {
-      piece.remove();
-    }, 6000);
+      showScreen("bouquet");
+    }, 2200);
   }
 }
 
 
-function resetBirthdayExperience() {
+function showPhotos() {
+  currentPhotoIndex = 0;
+
+  updatePhoto();
+
+  showScreen("photo");
+}
+
+
+function updatePhoto() {
+  const photo = photos[currentPhotoIndex];
+
+  memoryPhoto.classList.add("changing");
+
+  window.setTimeout(() => {
+    memoryPhoto.src = photo.src;
+
+    memoryPhoto.onerror = () => {
+      memoryPhoto.src =
+        "data:image/svg+xml;charset=UTF-8," +
+        encodeURIComponent(`
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="600"
+            height="800"
+          >
+            <rect
+              width="100%"
+              height="100%"
+              fill="#f5dce8"
+            />
+
+            <text
+              x="50%"
+              y="45%"
+              text-anchor="middle"
+              font-size="35"
+              fill="#a65d80"
+            >
+              写真を入れてね
+            </text>
+
+            <text
+              x="50%"
+              y="52%"
+              text-anchor="middle"
+              font-size="80"
+            >
+              📷
+            </text>
+          </svg>
+        `);
+    };
+
+    photoCaption.textContent =
+      photo.caption;
+
+    photoProgress.textContent =
+      `${currentPhotoIndex + 1} / ${photos.length}`;
+
+    memoryPhoto.classList.remove("changing");
+
+    if (
+      currentPhotoIndex ===
+      photos.length - 1
+    ) {
+      nextPhotoButton.textContent =
+        "最後のメッセージへ 💖";
+    } else {
+      nextPhotoButton.textContent =
+        "次の写真へ →";
+    }
+  }, 350);
+}
+
+
+function showNextPhoto() {
+  if (
+    currentPhotoIndex <
+    photos.length - 1
+  ) {
+    currentPhotoIndex += 1;
+    updatePhoto();
+    return;
+  }
+
+  createConfetti(100);
+
+  showScreen("final");
+}
+
+
+function startCredits() {
+  showScreen("credit");
+
+  window.setTimeout(() => {
+    showScreen("letter");
+  }, 16000);
+}
+
+
+function resetExperience() {
   stopMicrophone();
 
   candlesAreOut = false;
   microphoneStarted = false;
   blowFrameCount = 0;
+  currentRoseCount = 0;
+  currentPhotoIndex = 0;
 
-  cake.classList.remove("blown-out");
+  cakeArea.classList.remove("blown-out");
 
   meterFill.style.width = "0%";
   meterText.textContent =
     "マイクはまだオフです";
 
-  instructionText.innerHTML =
-    "下のボタンを押して、<br>" +
-    "iPhoneに向かって「ふーっ」としてね";
-
   microphoneButton.disabled = false;
   microphoneButton.textContent =
     "🎤 マイクをオンにする";
 
-  tapButton.disabled = false;
+  cakeTapButton.disabled = false;
 
-  showScreen("start");
+  giftBox.classList.remove("opened");
+  giftMessage.textContent = "🎁";
+
+  roseGarden.innerHTML = "";
+  roseCount.textContent = "0 / 27";
+  roseMessage.textContent =
+    "1本ずつ、気持ちを込めました";
+
+  addRoseButton.disabled = false;
+  addRoseButton.textContent =
+    "🌹 バラを受け取る";
+
+  showScreen("opening");
 }
 
 
 startButton.addEventListener(
   "click",
-  startBirthdayExperience
+  startExperience
 );
 
 microphoneButton.addEventListener(
@@ -394,17 +603,17 @@ microphoneButton.addEventListener(
   startMicrophone
 );
 
-tapButton.addEventListener(
+cakeTapButton.addEventListener(
   "click",
   blowOutCandles
 );
 
-cake.addEventListener(
+cakeArea.addEventListener(
   "click",
   blowOutCandles
 );
 
-cake.addEventListener(
+cakeArea.addEventListener(
   "keydown",
   (event) => {
     if (
@@ -417,9 +626,41 @@ cake.addEventListener(
   }
 );
 
+giftBox.addEventListener(
+  "click",
+  openGift
+);
+
+addRoseButton.addEventListener(
+  "click",
+  addRose
+);
+
+photoButton.addEventListener(
+  "click",
+  showPhotos
+);
+
+nextPhotoButton.addEventListener(
+  "click",
+  showNextPhoto
+);
+
+creditButton.addEventListener(
+  "click",
+  startCredits
+);
+
+envelope.addEventListener(
+  "click",
+  () => {
+    showScreen("message");
+  }
+);
+
 replayButton.addEventListener(
   "click",
-  resetBirthdayExperience
+  resetExperience
 );
 
 window.addEventListener(
