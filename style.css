@@ -10,7 +10,6 @@ body {
   margin: 0;
   min-height: 100vh;
   min-height: 100dvh;
-
   overflow-x: hidden;
 
   font-family:
@@ -49,7 +48,6 @@ button {
 
 .screen {
   display: none;
-
   position: relative;
 
   width: 100%;
@@ -66,7 +64,6 @@ button {
   align-items: center;
 
   overflow: hidden;
-
   text-align: center;
 
   animation: fadeIn 0.7s ease;
@@ -568,10 +565,6 @@ h2 {
   transition: transform 0.4s ease;
 }
 
-.gift-box:hover {
-  transform: scale(1.03);
-}
-
 .gift-body {
   position: absolute;
   bottom: 0;
@@ -656,19 +649,6 @@ h2 {
     rotate(25deg);
 }
 
-.gift-box.opened {
-  animation: giftGlow 1s ease;
-}
-
-@keyframes giftGlow {
-  50% {
-    filter:
-      drop-shadow(
-        0 0 30px rgba(238, 111, 183, 0.9)
-      );
-  }
-}
-
 .gift-message {
   min-height: 35px;
 
@@ -685,7 +665,7 @@ h2 {
   justify-content: flex-start;
 
   padding-top:
-    max(50px, env(safe-area-inset-top));
+    max(48px, env(safe-area-inset-top));
 }
 
 .rose-message {
@@ -700,7 +680,7 @@ h2 {
 }
 
 .rose-count {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 
   color: #d33e76;
 
@@ -711,20 +691,26 @@ h2 {
 .rose-garden {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 9px;
+  gap: 5px;
 
   width: 100%;
-  max-width: 440px;
-  min-height: 295px;
+  max-width: 480px;
+  min-height: 390px;
 
   align-content: start;
+  justify-items: center;
 
   margin-bottom: 20px;
-  padding: 20px;
+  padding: 18px 10px;
 
-  background: rgba(255, 255, 255, 0.65);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.88),
+      rgba(255, 244, 248, 0.72)
+    );
 
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.95);
   border-radius: 28px;
 
   box-shadow:
@@ -732,10 +718,19 @@ h2 {
 }
 
 .rose {
-  font-size: 43px;
-  line-height: 1;
+  display: block;
 
-  animation: roseAppear 0.5s ease;
+  width: 64px;
+  height: 88px;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 9px 7px rgba(71, 20, 34, 0.22)
+    );
+
+  animation: roseAppear 0.55s ease;
 }
 
 @keyframes roseAppear {
@@ -743,9 +738,9 @@ h2 {
     opacity: 0;
 
     transform:
-      translateY(30px)
-      scale(0.3)
-      rotate(-15deg);
+      translateY(28px)
+      scale(0.35)
+      rotate(-10deg);
   }
 
   to {
@@ -762,83 +757,37 @@ h2 {
 /* 花束 */
 
 .bouquet {
-  position: relative;
+  width: min(88vw, 460px);
 
-  width: 300px;
-  height: 360px;
-
-  margin: 10px auto 16px;
+  margin: 8px auto 24px;
 
   animation: bouquetAppear 1s ease;
+}
+
+.bouquet-image {
+  display: block;
+
+  width: 100%;
+  max-height: 500px;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 28px 24px rgba(71, 24, 42, 0.28)
+    );
 }
 
 @keyframes bouquetAppear {
   from {
     opacity: 0;
-    transform: scale(0.5);
+    transform: scale(0.6);
   }
 
   to {
     opacity: 1;
     transform: scale(1);
   }
-}
-
-.bouquet-flowers {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  z-index: 3;
-
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-
-  width: 265px;
-
-  transform: translateX(-50%);
-}
-
-.bouquet-flowers span {
-  margin: -5px;
-
-  font-size: 55px;
-}
-
-.bouquet-paper {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-
-  width: 180px;
-  height: 210px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #f8e8d1,
-      #dfb78f
-    );
-
-  clip-path:
-    polygon(
-      0 0,
-      100% 0,
-      65% 100%,
-      35% 100%
-    );
-
-  transform: translateX(-50%);
-}
-
-.bouquet-ribbon {
-  position: absolute;
-  bottom: 55px;
-  left: 50%;
-  z-index: 5;
-
-  font-size: 64px;
-
-  transform: translateX(-50%);
 }
 
 .bouquet-message {
@@ -854,14 +803,14 @@ h2 {
 /* 写真 */
 
 .photo-screen {
+  color: white;
+
   background:
     linear-gradient(
       145deg,
       #1b151d,
       #372437
     );
-
-  color: white;
 }
 
 .photo-frame {
@@ -920,7 +869,7 @@ h2 {
 }
 
 
-/* 最終画面 */
+/* 最後 */
 
 .final-title {
   margin: 0;
@@ -960,7 +909,6 @@ h2 {
 
 .credit-screen {
   justify-content: flex-start;
-
   overflow: hidden;
 }
 
@@ -1213,6 +1161,27 @@ h2 {
 }
 
 
+/* スマホ */
+
+@media (max-width: 600px) {
+  .rose-garden {
+    grid-template-columns: repeat(5, 1fr);
+
+    min-height: 420px;
+    padding: 16px 6px;
+  }
+
+  .rose {
+    width: 58px;
+    height: 82px;
+  }
+
+  .bouquet {
+    width: min(94vw, 430px);
+  }
+}
+
+
 /* 小さいスマホ */
 
 @media (max-width: 380px) {
@@ -1226,17 +1195,13 @@ h2 {
     margin-bottom: -16px;
   }
 
-  .rose {
-    font-size: 37px;
-  }
-
   .rose-garden {
     grid-template-columns: repeat(5, 1fr);
+    min-height: 390px;
   }
 
-  .bouquet {
-    transform: scale(0.88);
-    margin-top: -15px;
-    margin-bottom: -20px;
+  .rose {
+    width: 51px;
+    height: 73px;
   }
 }
