@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <title>Happy Birthday 🎂</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="birthday-card">
+
+    <section id="startScreen" class="screen active">
+      <div class="top-icon">🎁</div>
+
+      <p class="small-title">A SPECIAL DAY FOR YOU</p>
+
+      <h1>
+        なーちゃんへ<br>
+        誕生日おめでとう
+      </h1>
+
+      <p class="description">
+        今日は特別な日なので、<br>
+        小さな誕生日サイトを作りました。
+      </p>
+
+      <button id="startButton" class="main-button">
+        サプライズを始める 💖
+      </button>
+    </section>
+
+
+    <section id="countdownScreen" class="screen">
+      <p class="small-title">READY?</p>
+
+      <div id="countdownNumber" class="countdown-number">
+        3
+      </div>
+    </section>
+
+
+    <section id="cakeScreen" class="screen">
+      <p class="small-title">MAKE A WISH</p>
+
+      <h1>願いごとをしてね</h1>
+
+      <p id="instructionText" class="description">
+        下のボタンを押して、<br>
+        iPhoneに向かって「ふーっ」としてね
+      </p>
+
+      <div
+        id="cake"
+        class="cake-wrapper"
+        role="button"
+        tabindex="0"
+        aria-label="ケーキをタップしてロウソクを消す"
+      >
+        <div class="candles">
+
+          <div class="candle">
+            <div class="flame"></div>
+            <div class="wick"></div>
+          </div>
+
+          <div class="candle">
+            <div class="flame"></div>
+            <div class="wick"></div>
+          </div>
+
+          <div class="candle">
+            <div class="flame"></div>
+            <div class="wick"></div>
+          </div>
+
+          <div class="candle">
+            <div class="flame"></div>
+            <div class="wick"></div>
+          </div>
+
+          <div class="candle">
+            <div class="flame"></div>
+            <div class="wick"></div>
+          </div>
+
+        </div>
+
+        <div class="cake">
+          <div class="icing">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="cake-message">
+            HAPPY<br>BIRTHDAY
+          </div>
+        </div>
+
+        <div class="cake-plate"></div>
+      </div>
+
+      <div class="meter-area">
+        <div class="meter">
+          <div id="meterFill" class="meter-fill"></div>
+        </div>
+
+        <p id="meterText" class="meter-text">
+          マイクはまだオフです
+        </p>
+      </div>
+
+      <button id="microphoneButton" class="main-button">
+        🎤 マイクをオンにする
+      </button>
+
+      <button id="tapButton" class="sub-button">
+        うまく消えないときはタップ
+      </button>
+    </section>
+
+
+    <section id="resultScreen" class="screen">
+      <div id="confettiArea" class="confetti-area"></div>
+
+      <div class="result-icon">🎉</div>
+
+      <p class="small-title">HAPPY BIRTHDAY</p>
+
+      <h1>
+        なーちゃん<br>
+        お誕生日おめでとう
+      </h1>
+
+      <p class="birthday-message">
+        生まれてきてくれてありがとう。<br>
+        一緒に過ごせることが幸せです。
+      </p>
+
+      <div class="message-box">
+        これからもいっぱい笑って、<br>
+        たくさん思い出作ろうね。<br><br>
+        大好きやで 💖
+      </div>
+
+      <button id="replayButton" class="main-button">
+        もう一度見る 🔄
+      </button>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
