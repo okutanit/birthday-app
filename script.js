@@ -425,10 +425,11 @@ function addRose() {
     return;
   }
 
-  const rose = document.createElement("span");
+ const rose = document.createElement("img");
 
-  rose.className = "rose";
-  rose.textContent = "🌹";
+ rose.className = "rose";
+ rose.src = "images/rose.png";
+ rose.alt = "赤いバラ";
 
   roseGarden.appendChild(rose);
 
