@@ -83,15 +83,15 @@ photoFrame.appendChild(memoryVideo);
 const roseMessages = [
   "笑顔がかわいいところ",
   "一緒にいると楽しいところ",
-  "優しいところ",
+  "電話いつもしてくれるところ",
   "頑張り屋なところ",
-  "よく笑ってくれるところ",
+  "笑い方がかわいいところ",
   "一緒にいると落ち着くところ",
   "話を聞いてくれるところ",
-  "素直なところ",
+  "いっぱい話してくれるところ",
   "美味しそうに食べるところ",
   "照れた顔がかわいいところ",
-  "自分のことを大切にしてくれるところ",
+  "俺の時間も大切にしてくれるところ",
   "お出かけを楽しんでくれるところ",
   "何気ない時間も楽しくしてくれるところ",
   "かわいい声",
@@ -101,13 +101,13 @@ const roseMessages = [
   "会える日を楽しみにしてくれるところ",
   "頑張っている姿",
   "自分らしくいてくれるところ",
-  "一緒に思い出を作ってくれるところ",
-  "どんな時もかわいいところ",
-  "一緒にいる未来を想像できるところ",
-  "出会ってくれたこと",
+  "ぷんちゃんのこと好きなところ",
+  "俺のことも好きでいてくれるところ",
+  "俺のことを選んでくれたところ",
+  "好きって言ってくれるところ",
   "好きになってくれたこと",
   "いつもそばにいてくれること",
-  "生まれてきてくれてありがとう"
+  "いつか一緒にいたいな"
 ];
 
 /*
@@ -122,28 +122,28 @@ const roseMessages = [
 const photos = [
   {
     type: "image",
-    src: "images/IMG_6370.JPG",
-    caption: "一緒に過ごした大切な時間"
+    src: "images/IMG_6404.jpg",
+    caption: "シールいっぱい集めよー"
   },
   {
     type: "image",
-    src: "images/IMG_6374.JPG",
-    caption: "何気ない一日も、特別な思い出"
+    src: "images/IMG_6392.jpg",
+    caption: "この写真かわいい"
   },
   {
     type: "video",
-    src: "images/GCSL7009.MOV",
-    caption: "これからもいろんな場所へ行こうね"
+    src: "images/IDFJ5899.mp4",
+    caption: "一緒におれて楽しかった！"
   },
   {
     type: "video",
-    src: "images/IZLR4229.MOV",
-    caption: "一緒に笑えることが幸せです"
+    src: "images/BNFF6892.mp4",
+    caption: "これからも色んなところ行こな"
   },
   {
     type: "video",
-    src: "images/UHBP2581.MP4",
-    caption: "これからもたくさん思い出作ろうね"
+    src: "images/UHBP2581.mp4",
+    caption: "これからもいっぱい思い出作ろー"
   }
 ];
 
@@ -206,7 +206,7 @@ function createConfetti(pieceCount = 90) {
 
 async function startExperience() {
   startButton.disabled = true;
-  startButton.textContent = "準備しています…";
+  startButton.textContent = "ちょっと待ってね";
 
   await wait(900);
 
