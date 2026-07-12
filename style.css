@@ -11,9 +11,7 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: hidden;
-
   color: #432f46;
-
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -21,18 +19,9 @@ body {
     "Hiragino Kaku Gothic ProN",
     "Yu Gothic",
     sans-serif;
-
   background:
-    radial-gradient(
-      circle at top left,
-      rgba(255, 255, 255, 0.9),
-      transparent 28%
-    ),
-    linear-gradient(
-      135deg,
-      #ffe1eb,
-      #eadcff
-    );
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 28%),
+    linear-gradient(135deg, #ffe1eb, #eadcff);
 }
 
 button {
@@ -46,31 +35,22 @@ button {
   min-height: 100dvh;
 }
 
-
-/* ========================================
-   共通画面
-======================================== */
-
+/* 共通画面 */
 .screen {
   display: none;
   position: relative;
-
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
-
   padding:
     max(36px, env(safe-area-inset-top))
     20px
     max(36px, env(safe-area-inset-bottom));
-
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   overflow: hidden;
   text-align: center;
-
   animation: fadeIn 0.7s ease;
 }
 
@@ -92,23 +72,15 @@ button {
 
 .dark-screen {
   color: white;
-
   background:
-    radial-gradient(
-      circle at center,
-      #31213b,
-      #120d18 70%
-    );
+    radial-gradient(circle at center, #31213b, #120d18 70%);
 }
 
 .chapter-label {
   position: relative;
   z-index: 3;
-
   margin: 0 0 18px;
-
   color: #e5a7c8;
-
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 4px;
@@ -122,7 +94,6 @@ h2 {
 
 h2 {
   margin: 0 0 16px;
-
   font-size: 30px;
   line-height: 1.45;
 }
@@ -130,11 +101,8 @@ h2 {
 .description {
   position: relative;
   z-index: 3;
-
   margin: 0 0 28px;
-
   color: #746374;
-
   font-size: 16px;
   line-height: 1.8;
 }
@@ -143,24 +111,16 @@ h2 {
   color: rgba(255, 255, 255, 0.76);
 }
 
-
-/* ========================================
-   共通ボタン
-======================================== */
-
+/* ボタン */
 .main-button,
 .sub-button {
   position: relative;
   z-index: 10;
-
   width: 100%;
   max-width: 340px;
-
   border: 0;
   border-radius: 999px;
-
   cursor: pointer;
-
   transition:
     transform 0.18s ease,
     box-shadow 0.18s ease,
@@ -169,19 +129,9 @@ h2 {
 
 .main-button {
   padding: 15px 24px;
-
   color: white;
-
-  background:
-    linear-gradient(
-      135deg,
-      #e94b8f,
-      #ad4ed3
-    );
-
-  box-shadow:
-    0 14px 35px rgba(221, 73, 157, 0.3);
-
+  background: linear-gradient(135deg, #e94b8f, #ad4ed3);
+  box-shadow: 0 14px 35px rgba(221, 73, 157, 0.3);
   font-size: 16px;
   font-weight: 800;
 }
@@ -189,12 +139,9 @@ h2 {
 .sub-button {
   margin-top: 12px;
   padding: 13px 20px;
-
   color: #7b5975;
   background: white;
-
   border: 1px solid #ead8e7;
-
   font-size: 14px;
   font-weight: 700;
 }
@@ -210,30 +157,17 @@ h2 {
   cursor: default;
 }
 
-
-/* ========================================
-   星
-======================================== */
-
+/* 星 */
 .stars,
 .stars::before,
 .stars::after {
   position: absolute;
   inset: 0;
-
   pointer-events: none;
-
   background-image:
-    radial-gradient(
-      circle,
-      white 1px,
-      transparent 1px
-    );
-
+    radial-gradient(circle, white 1px, transparent 1px);
   background-size: 54px 54px;
-
   opacity: 0.38;
-
   animation: starsMove 16s linear infinite;
 }
 
@@ -253,23 +187,13 @@ h2 {
 }
 
 @keyframes starsMove {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(80px);
-  }
+  from { transform: translateY(0); }
+  to { transform: translateY(80px); }
 }
 
-
-/* ========================================
-   オープニング
-======================================== */
-
+/* オープニング */
 .opening-title {
   margin: 0;
-
   font-family: Georgia, serif;
   font-size: clamp(44px, 11vw, 78px);
   font-weight: 400;
@@ -279,11 +203,8 @@ h2 {
 .opening-age {
   position: relative;
   z-index: 3;
-
   margin: 8px 0 4px;
-
   color: #f3b6d3;
-
   font-family: Georgia, serif;
   font-size: 110px;
   line-height: 1;
@@ -292,145 +213,100 @@ h2 {
 .opening-name {
   position: relative;
   z-index: 3;
-
   margin: 0 0 42px;
-
   color: rgba(255, 255, 255, 0.75);
-
   font-size: 17px;
   letter-spacing: 6px;
 }
 
-
-/* ========================================
-   ケーキ画面
-======================================== */
-
+/* ケーキ画面 */
 .cake-screen {
   padding: 16px;
-
   background:
-    radial-gradient(
-      circle at 50% 15%,
-      #ffffff 0%,
-      #fff5f9 55%,
-      #f3def7 100%
-    );
+    radial-gradient(circle at 50% 15%, #ffffff 0%, #fff5f9 55%, #f3def7 100%);
 }
 
 .cake-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 100%;
   max-width: 680px;
   min-height: calc(100dvh - 32px);
-
   padding:
-    max(38px, env(safe-area-inset-top))
+    max(34px, env(safe-area-inset-top))
     24px
     max(32px, env(safe-area-inset-bottom));
-
   overflow: hidden;
-
   background:
-    linear-gradient(
-      150deg,
-      rgba(255, 255, 255, 0.97),
-      rgba(255, 247, 251, 0.94)
-    );
-
+    linear-gradient(150deg, rgba(255, 255, 255, 0.97), rgba(255, 247, 251, 0.94));
   border: 1px solid rgba(255, 255, 255, 0.96);
   border-radius: 38px;
-
-  box-shadow:
-    0 28px 75px rgba(111, 60, 103, 0.18);
+  box-shadow: 0 28px 75px rgba(111, 60, 103, 0.18);
 }
 
 .cake-chapter {
-  margin: 0 0 18px;
-
+  margin: 0 0 14px;
   color: #e98ab8;
-
   font-size: 13px;
   font-weight: 900;
   letter-spacing: 6px;
 }
 
 .cake-heading {
-  margin: 0 0 14px;
-
+  margin: 0 0 10px;
   color: #28152f;
-
   font-family:
     Georgia,
     "Yu Mincho",
     "Hiragino Mincho ProN",
     serif;
-
   font-size: clamp(29px, 7vw, 43px);
   font-weight: 700;
   line-height: 1.35;
 }
 
 .cake-description {
-  margin: 0 0 8px;
-
+  margin: 0 0 4px;
   color: #746674;
-
   font-size: 15px;
-  line-height: 1.85;
+  line-height: 1.75;
 }
 
-
-/* ========================================
-   ケーキ画像
-======================================== */
-
+/*
+  ここが今回の修正ポイント。
+  画像ファイル自体は変更せず、親要素の幅に収める。
+*/
 .cake-image-area {
   position: relative;
-
-  width: min(94vw, 580px);
-
-  margin: 8px auto 10px;
-
+  width: 100%;
+  max-width: 580px;
+  margin: 6px auto 10px;
+  overflow: visible;
   cursor: pointer;
-
   user-select: none;
   -webkit-user-select: none;
 }
 
-.birthday-cake-image1 {
+.birthday-cake-image {
   display: block;
-
   width: 100%;
+  max-width: 100%;
   height: auto;
-
+  margin: 0 auto;
   object-fit: contain;
-
-  filter:
-    drop-shadow(
-      0 24px 28px rgba(92, 43, 72, 0.18)
-    );
+  filter: drop-shadow(0 18px 22px rgba(92, 43, 72, 0.14));
 }
 
-
-/* ========================================
-   画像の上に重ねる炎
-======================================== */
-
+/* 画像に重ねる炎 */
 .image-flame {
   position: absolute;
   z-index: 10;
-
-  width: 33px;
-  height: 58px;
-
+  width: clamp(20px, 4.1%, 34px);
+  aspect-ratio: 0.57;
   border-radius:
     52% 48% 52% 48% /
     70% 70% 30% 30%;
-
   background:
     radial-gradient(
       ellipse at 50% 72%,
@@ -439,54 +315,36 @@ h2 {
       #ff8b3e 52% 76%,
       #f04d35 82% 100%
     );
-
   box-shadow:
     0 0 14px rgba(255, 190, 69, 0.95),
     0 0 30px rgba(255, 145, 70, 0.55);
-
   transform-origin: center bottom;
-
-  animation:
-    elegantFlame
-    0.18s
-    ease-in-out
-    infinite
-    alternate;
+  animation: elegantFlame 0.18s ease-in-out infinite alternate;
 }
 
 .image-flame .flame-core {
   position: absolute;
-  bottom: 8px;
+  bottom: 13%;
   left: 50%;
-
-  width: 12px;
-  height: 24px;
-
+  width: 36%;
+  height: 43%;
   border-radius: 50% 50% 45% 45%;
-
-  background:
-    linear-gradient(
-      to top,
-      #fffef0,
-      #ffe77c
-    );
-
+  background: linear-gradient(to top, #fffef0, #ffe77c);
   transform: translateX(-50%);
 }
 
 /*
-  炎の位置。
-  birthday-cake.png1のロウソク位置に合わせて調整する。
+  birthday-cake1.png（1536×1152前提）の炎位置。
+  少しズレる場合は left だけ0.5%ずつ調整。
 */
-
 .flame-two {
-  top: 30%;
-  left: 40.5%;
+  top: 1.8%;
+  left: 35.7%;
 }
 
 .flame-seven {
-  top: 30%;
-  left: 61.2%;
+  top: 1.8%;
+  left: 56.7%;
 }
 
 @keyframes elegantFlame {
@@ -516,15 +374,8 @@ h2 {
   }
 }
 
-
-/* 息・タップで火が消える */
-
 .cake-image-area.blown-out .image-flame {
-  animation:
-    elegantFlameOut
-    0.75s
-    ease
-    forwards;
+  animation: elegantFlameOut 0.75s ease forwards;
 }
 
 @keyframes elegantFlameOut {
@@ -535,7 +386,6 @@ h2 {
 
   45% {
     opacity: 0.65;
-
     transform:
       translateX(-50%)
       translateY(-20px)
@@ -545,9 +395,7 @@ h2 {
 
   100% {
     opacity: 0;
-
     filter: blur(6px);
-
     transform:
       translateX(-50%)
       translateY(-46px)
@@ -556,60 +404,39 @@ h2 {
   }
 }
 
-
-/* ========================================
-   音量メーター
-======================================== */
-
+/* 音量メーター */
 .sound-meter {
   width: 100%;
   max-width: 340px;
-
   margin-bottom: 14px;
 }
 
 .meter-track {
   width: 100%;
   height: 12px;
-
   overflow: hidden;
-
   background: #eee3ed;
-
   border-radius: 999px;
 }
 
 .meter-fill {
   width: 0%;
   height: 100%;
-
   border-radius: inherit;
-
-  background:
-    linear-gradient(
-      90deg,
-      #ee88b7,
-      #e33b98,
-      #a645d1
-    );
-
+  background: linear-gradient(90deg, #ee88b7, #e33b98, #a645d1);
   transition: width 0.08s linear;
 }
 
 .sound-meter p {
   min-height: 22px;
-
   margin: 9px 0 0;
-
   color: #877285;
-
   font-size: 13px;
 }
 
 .cake-meter {
   width: 100%;
   max-width: 500px;
-
   margin: 0 0 15px;
 }
 
@@ -620,34 +447,22 @@ h2 {
 
 .cake-main-button {
   padding: 17px 25px;
-
   font-size: 18px;
 }
 
 .cake-sub-button {
   color: #df4a91;
-
-  background:
-    rgba(255, 255, 255, 0.76);
-
+  background: rgba(255, 255, 255, 0.76);
   border: 2px solid #ed7daf;
 }
 
-
-/* ========================================
-   プレゼント
-======================================== */
-
+/* プレゼント */
 .gift-box {
   position: relative;
-
   width: 230px;
   height: 245px;
-
   margin: 20px auto 32px;
-
   cursor: pointer;
-
   transition: transform 0.4s ease;
 }
 
@@ -655,21 +470,11 @@ h2 {
   position: absolute;
   bottom: 0;
   left: 15px;
-
   width: 200px;
   height: 170px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #e55796,
-      #b950ce
-    );
-
+  background: linear-gradient(135deg, #e55796, #b950ce);
   border-radius: 8px 8px 20px 20px;
-
-  box-shadow:
-    0 20px 35px rgba(115, 55, 110, 0.25);
+  box-shadow: 0 20px 35px rgba(115, 55, 110, 0.25);
 }
 
 .gift-lid {
@@ -677,19 +482,10 @@ h2 {
   top: 45px;
   left: 0;
   z-index: 3;
-
   width: 230px;
   height: 55px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #f078ac,
-      #c467db
-    );
-
+  background: linear-gradient(135deg, #f078ac, #c467db);
   border-radius: 12px;
-
   transition:
     transform 0.9s ease,
     top 0.9s ease;
@@ -698,22 +494,17 @@ h2 {
 .ribbon-horizontal {
   position: absolute;
   top: 18px;
-
   width: 100%;
   height: 18px;
-
   background: #ffe2aa;
 }
 
 .ribbon-vertical {
   position: absolute;
   left: 50%;
-
   width: 28px;
   height: 100%;
-
   background: #ffe2aa;
-
   transform: translateX(-50%);
 }
 
@@ -721,48 +512,32 @@ h2 {
   position: absolute;
   top: -47px;
   left: 50%;
-
   font-size: 68px;
-
   transform: translateX(-50%);
 }
 
 .gift-box.opened .gift-lid {
   top: -45px;
-
-  transform:
-    translateX(70px)
-    rotate(25deg);
+  transform: translateX(70px) rotate(25deg);
 }
 
 .gift-message {
   min-height: 35px;
-
   color: #d74488;
-
   font-size: 22px;
   font-weight: 800;
 }
 
-
-/* ========================================
-   バラ
-======================================== */
-
+/* バラ */
 .rose-screen {
   justify-content: flex-start;
-
-  padding-top:
-    max(48px, env(safe-area-inset-top));
+  padding-top: max(48px, env(safe-area-inset-top));
 }
 
 .rose-message {
   min-height: 55px;
-
   margin: 0 0 10px;
-
   color: #875d78;
-
   font-size: 17px;
   font-weight: 700;
   line-height: 1.6;
@@ -770,9 +545,7 @@ h2 {
 
 .rose-count {
   margin-bottom: 16px;
-
   color: #d33e76;
-
   font-size: 25px;
   font-weight: 900;
 }
@@ -781,44 +554,30 @@ h2 {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 5px;
-
   width: 100%;
   max-width: 480px;
   min-height: 390px;
-
   align-content: start;
   justify-items: center;
-
   margin-bottom: 20px;
   padding: 18px 10px;
-
   background:
     linear-gradient(
       145deg,
       rgba(255, 255, 255, 0.88),
       rgba(255, 244, 248, 0.72)
     );
-
   border: 1px solid rgba(255, 255, 255, 0.95);
   border-radius: 28px;
-
-  box-shadow:
-    0 18px 40px rgba(116, 67, 104, 0.11);
+  box-shadow: 0 18px 40px rgba(116, 67, 104, 0.11);
 }
 
 .rose {
   display: block;
-
   width: 64px;
   height: 88px;
-
   object-fit: contain;
-
-  filter:
-    drop-shadow(
-      0 9px 7px rgba(71, 20, 34, 0.22)
-    );
-
+  filter: drop-shadow(0 9px 7px rgba(71, 20, 34, 0.22));
   animation: roseAppear 0.55s ease;
 }
 
@@ -826,14 +585,12 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: 50px;
 }
 
 @keyframes roseAppear {
   from {
     opacity: 0;
-
     transform:
       translateY(28px)
       scale(0.35)
@@ -842,7 +599,6 @@ h2 {
 
   to {
     opacity: 1;
-
     transform:
       translateY(0)
       scale(1)
@@ -850,31 +606,49 @@ h2 {
   }
 }
 
-
-/* ========================================
-   花束
-======================================== */
-
+/* 花束 */
 .bouquet {
-  width: min(88vw, 460px);
-
-  margin: 8px auto 24px;
-
+  position: relative;
+  width: 300px;
+  height: 360px;
+  margin: 10px auto 16px;
   animation: bouquetAppear 1s ease;
 }
 
-.bouquet-image {
-  display: block;
+.bouquet-flowers {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 265px;
+  transform: translateX(-50%);
+}
 
-  width: 100%;
-  max-height: 500px;
+.bouquet-flowers span {
+  margin: -5px;
+  font-size: 55px;
+}
 
-  object-fit: contain;
+.bouquet-paper {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  width: 180px;
+  height: 210px;
+  background: linear-gradient(135deg, #f8e8d1, #dfb78f);
+  clip-path: polygon(0 0, 100% 0, 65% 100%, 35% 100%);
+  transform: translateX(-50%);
+}
 
-  filter:
-    drop-shadow(
-      0 28px 24px rgba(71, 24, 42, 0.28)
-    );
+.bouquet-ribbon {
+  position: absolute;
+  bottom: 55px;
+  left: 50%;
+  z-index: 5;
+  font-size: 64px;
+  transform: translateX(-50%);
 }
 
 @keyframes bouquetAppear {
@@ -891,58 +665,36 @@ h2 {
 
 .bouquet-message {
   margin: 0 0 28px;
-
   color: #76566d;
-
   font-size: 17px;
   line-height: 1.8;
 }
 
-
-/* ========================================
-   写真・動画
-======================================== */
-
+/* 写真・動画 */
 .photo-screen {
   color: white;
-
-  background:
-    linear-gradient(
-      145deg,
-      #1b151d,
-      #372437
-    );
+  background: linear-gradient(145deg, #1b151d, #372437);
 }
 
 .photo-frame {
   position: relative;
-
   width: min(88vw, 440px);
   height: min(105vw, 550px);
   max-height: 58vh;
-
   overflow: hidden;
-
   margin-bottom: 20px;
-
   border: 10px solid white;
   border-radius: 8px;
-
   background: #2f2f2f;
-
-  box-shadow:
-    0 25px 55px rgba(0, 0, 0, 0.35);
-
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.35);
   transform: rotate(-1deg);
 }
 
 .photo-frame img,
 .photo-frame video {
   display: block;
-
   width: 100%;
   height: 100%;
-
   object-fit: cover;
 }
 
@@ -959,32 +711,22 @@ h2 {
 
 .photo-caption {
   min-height: 48px;
-
   margin: 0 0 14px;
-
   color: rgba(255, 255, 255, 0.85);
-
   font-size: 17px;
   line-height: 1.7;
 }
 
 .photo-progress {
   margin-bottom: 20px;
-
   color: #eeb1d1;
-
   font-size: 14px;
   letter-spacing: 3px;
 }
 
-
-/* ========================================
-   最後
-======================================== */
-
+/* 最後 */
 .final-title {
   margin: 0;
-
   font-family: Georgia, serif;
   font-size: clamp(42px, 11vw, 78px);
   font-weight: 400;
@@ -993,11 +735,8 @@ h2 {
 .final-age {
   position: relative;
   z-index: 3;
-
   margin: 6px 0 28px;
-
   color: #eab0ce;
-
   font-family: Georgia, serif;
   font-size: 110px;
   line-height: 1;
@@ -1006,20 +745,13 @@ h2 {
 .final-message {
   position: relative;
   z-index: 3;
-
   margin: 0 0 34px;
-
   color: rgba(255, 255, 255, 0.86);
-
   font-size: 17px;
   line-height: 1.9;
 }
 
-
-/* ========================================
-   エンドロール
-======================================== */
-
+/* エンドロール */
 .credit-screen {
   justify-content: flex-start;
   overflow: hidden;
@@ -1028,17 +760,13 @@ h2 {
 .credit-roll {
   position: absolute;
   top: 100vh;
-
   width: 100%;
-
   color: white;
-
   animation: creditRoll 16s linear forwards;
 }
 
 .credit-roll p {
   color: #d9abc4;
-
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 4px;
@@ -1046,7 +774,6 @@ h2 {
 
 .credit-roll h1 {
   margin-top: 80px;
-
   font-size: 54px;
   letter-spacing: 10px;
 }
@@ -1057,7 +784,6 @@ h2 {
 
 .credit-roll h3 {
   margin: 10px 0;
-
   font-size: 23px;
   font-weight: 400;
 }
@@ -1067,63 +793,33 @@ h2 {
 }
 
 @keyframes creditRoll {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-195vh);
-  }
+  from { transform: translateY(0); }
+  to { transform: translateY(-195vh); }
 }
 
-
-/* ========================================
-   封筒
-======================================== */
-
+/* 封筒 */
 .letter-screen {
-  background:
-    linear-gradient(
-      145deg,
-      #fff4f8,
-      #eee1f8
-    );
+  background: linear-gradient(145deg, #fff4f8, #eee1f8);
 }
 
 .envelope {
   position: relative;
-
   width: 270px;
   height: 185px;
-
   margin: 20px auto 30px;
-
   cursor: pointer;
-
-  filter:
-    drop-shadow(
-      0 20px 25px rgba(91, 53, 81, 0.18)
-    );
-
-  animation:
-    envelopeFloat
-    2s
-    ease-in-out
-    infinite;
+  filter: drop-shadow(0 20px 25px rgba(91, 53, 81, 0.18));
+  animation: envelopeFloat 2s ease-in-out infinite;
 }
 
 @keyframes envelopeFloat {
-  50% {
-    transform: translateY(-10px);
-  }
+  50% { transform: translateY(-10px); }
 }
 
 .envelope-back {
   position: absolute;
   inset: 0;
-
   background: #eaa5c5;
-
   border-radius: 12px;
 }
 
@@ -1131,18 +827,8 @@ h2 {
   position: absolute;
   inset: 0;
   z-index: 3;
-
   background: #f4bdd5;
-
-  clip-path:
-    polygon(
-      0 30%,
-      50% 72%,
-      100% 30%,
-      100% 100%,
-      0 100%
-    );
-
+  clip-path: polygon(0 30%, 50% 72%, 100% 30%, 100% 100%, 0 100%);
   border-radius: 12px;
 }
 
@@ -1151,105 +837,70 @@ h2 {
   top: 28px;
   left: 50%;
   z-index: 2;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: 210px;
   height: 125px;
-
   background: white;
-
   border-radius: 8px;
-
   font-size: 58px;
-
   transform: translateX(-50%);
 }
 
-
-/* ========================================
-   手紙
-======================================== */
-
+/* 手紙 */
 .letter-paper {
   width: 100%;
   max-width: 470px;
-
   margin-bottom: 28px;
   padding: 34px 27px;
-
   color: #594655;
-
   background:
     linear-gradient(
       rgba(255, 255, 255, 0.95),
       rgba(255, 251, 245, 0.95)
     );
-
   border-radius: 8px;
-
-  box-shadow:
-    0 22px 55px rgba(91, 60, 83, 0.16);
-
+  box-shadow: 0 22px 55px rgba(91, 60, 83, 0.16);
   text-align: left;
-
   transform: rotate(-0.5deg);
 }
 
 .letter-paper h2 {
   margin-bottom: 30px;
-
   font-family: Georgia, serif;
   font-size: 29px;
 }
 
 .letter-paper p {
   margin: 0 0 21px;
-
   font-size: 16px;
   line-height: 2;
 }
 
 .letter-sign {
   margin-top: 35px !important;
-
   color: #d24080;
-
   font-size: 19px !important;
   font-weight: 800;
-
   text-align: right;
 }
 
-
-/* ========================================
-   紙吹雪
-======================================== */
-
+/* 紙吹雪 */
 .confetti {
   position: fixed;
   top: -30px;
   z-index: 1000;
-
   width: 11px;
   height: 19px;
-
   border-radius: 3px;
-
   pointer-events: none;
-
-  animation:
-    confettiFall
-    linear
-    forwards;
+  animation: confettiFall linear forwards;
 }
 
 @keyframes confettiFall {
   from {
     opacity: 1;
-
     transform:
       translate3d(0, -20px, 0)
       rotate(0deg);
@@ -1257,39 +908,25 @@ h2 {
 
   to {
     opacity: 0.8;
-
     transform:
-      translate3d(
-        var(--drift),
-        110vh,
-        0
-      )
+      translate3d(var(--drift), 110vh, 0)
       rotate(900deg);
   }
 }
 
-
-/* ========================================
-   PC
-======================================== */
-
+/* PC */
 @media (min-width: 700px) {
   .screen {
     width: min(680px, calc(100% - 40px));
     min-height: 760px;
-
     margin: 20px auto;
     padding: 55px 50px;
-
     border-radius: 35px;
-
-    box-shadow:
-      0 25px 70px rgba(79, 48, 75, 0.18);
+    box-shadow: 0 25px 70px rgba(79, 48, 75, 0.18);
   }
 
   .cake-screen {
     width: min(740px, calc(100% - 40px));
-
     padding: 16px;
   }
 
@@ -1299,11 +936,7 @@ h2 {
   }
 }
 
-
-/* ========================================
-   スマホ
-======================================== */
-
+/* スマホ */
 @media (max-width: 600px) {
   .screen {
     padding:
@@ -1318,54 +951,33 @@ h2 {
 
   .cake-card {
     min-height: 100dvh;
-
     padding:
-      max(34px, env(safe-area-inset-top))
+      max(28px, env(safe-area-inset-top))
       14px
       max(26px, env(safe-area-inset-bottom));
-
     border-radius: 30px;
   }
 
   .cake-chapter {
-    margin-bottom: 12px;
-
+    margin-bottom: 10px;
     font-size: 11px;
   }
 
   .cake-heading {
-    margin-bottom: 10px;
-
-    font-size: 28px;
+    margin-bottom: 8px;
+    font-size: 27px;
   }
 
   .cake-description {
     margin-bottom: 0;
-
     font-size: 13px;
-    line-height: 1.7;
+    line-height: 1.65;
   }
 
   .cake-image-area {
-    width: min(98vw, 520px);
-
-    margin-top: 2px;
-    margin-bottom: 4px;
-  }
-
-  .image-flame {
-    width: 25px;
-    height: 44px;
-  }
-
-  .flame-two {
-    top: 18%;
-    left: 40.5%;
-  }
-
-  .flame-seven {
-    top: 18%;
-    left: 61.2%;
+    width: 100%;
+    max-width: 500px;
+    margin: 4px auto 8px;
   }
 
   .cake-meter {
@@ -1379,15 +991,12 @@ h2 {
 
   .cake-main-button {
     padding: 15px 22px;
-
     font-size: 16px;
   }
 
   .rose-garden {
     grid-template-columns: repeat(5, 1fr);
-
     min-height: 420px;
-
     padding: 16px 6px;
   }
 
@@ -1395,24 +1004,16 @@ h2 {
     width: 58px;
     height: 82px;
   }
-
-  .bouquet {
-    width: min(94vw, 430px);
-  }
 }
 
-
-/* ========================================
-   小さいスマホ
-======================================== */
-
+/* 小さいスマホ */
 @media (max-width: 380px) {
   h2 {
     font-size: 25px;
   }
 
   .cake-heading {
-    font-size: 25px;
+    font-size: 24px;
   }
 
   .cake-description {
@@ -1420,19 +1021,13 @@ h2 {
   }
 
   .cake-image-area {
-    width: 100vw;
-    margin-left: -12px;
-    margin-right: -12px;
-  }
-
-  .image-flame {
-    width: 22px;
-    height: 40px;
+    width: 100%;
+    max-width: none;
+    margin: 4px auto 8px;
   }
 
   .rose-garden {
     grid-template-columns: repeat(5, 1fr);
-
     min-height: 390px;
   }
 
