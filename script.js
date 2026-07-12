@@ -88,23 +88,23 @@ const roseMessages = [
 
 const photos = [
   {
-    src: "images/photo1.jpg",
+    src: "/images/IMG_6370.JPG",
     caption: "一緒に過ごした大切な時間"
   },
   {
-    src: "images/photo2.jpg",
+    src: "/images/IMG_6374.JPG",
     caption: "何気ない一日も、特別な思い出"
   },
   {
-    src: "images/photo3.jpg",
+    src: "/images/GCSL7009.MOV",
     caption: "これからもいろんな場所へ行こうね"
   },
   {
-    src: "images/photo4.jpg",
+    src: "/images/IZLR4229.MOV",
     caption: "一緒に笑えることが幸せです"
   },
   {
-    src: "images/photo5.jpg",
+    src: "/images/UHBP2581.MP4",
     caption: "これからもたくさん思い出作ろうね"
   }
 ];
