@@ -416,8 +416,9 @@ async function openGift() {
 
   giftBox.classList.add("opened");
 
-  giftMessage.textContent =
-    "まだプレゼントは続きます… 🌹";
+  if (giftMessage) {
+    giftMessage.textContent = "まだプレゼントは続きます… 🌹";
+  }
 
   createConfetti(45);
 
@@ -657,7 +658,9 @@ function resetExperience() {
   cakeTapButton.disabled = false;
 
   giftBox.classList.remove("opened");
-  giftMessage.textContent = "🎁";
+  if (giftMessage) {
+    giftMessage.textContent = "🎁";
+  }
 
   roseGarden.innerHTML = "";
   roseCount.textContent = "0 / 27";
