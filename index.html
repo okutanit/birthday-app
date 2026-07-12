@@ -42,64 +42,92 @@
 
 
     <!-- ケーキ -->
-    <section id="cakeScreen" class="screen cake-screen">
-      <p class="chapter-label">CHAPTER 1</p>
+   <!-- ケーキ -->
+<section id="cakeScreen" class="screen cake-screen">
+  <div class="cake-card">
+    <p class="cake-chapter">CHAPTER 1</p>
 
-      <h2>✨願いごとをしてね！✨</h2>
+    <h2 class="cake-heading">
+      <span>✨</span>
+      願いごとをしてね！
+      <span>✨</span>
+    </h2>
 
-      <p id="cakeInstruction" class="description">
-        「マイクをオン」にして<br>
-        息吹きかけてロウソク消してー🎂
+    <p id="cakeInstruction" class="cake-description">
+      「マイクをオン」にして<br>
+      息を吹きかけて<br>
+      ロウソクを消してー 🎂
+    </p>
+
+    <div
+      id="cakeArea"
+      class="cake-visual"
+      role="button"
+      tabindex="0"
+      aria-label="ケーキをタップしてロウソクを消す"
+    >
+      <!-- 2のロウソク -->
+      <div class="real-number-candle candle-two">
+        <div class="flame">
+          <span class="flame-core"></span>
+        </div>
+        <div class="wick"></div>
+        <span class="number-shape">2</span>
+      </div>
+
+      <!-- 7のロウソク -->
+      <div class="real-number-candle candle-seven">
+        <div class="flame">
+          <span class="flame-core"></span>
+        </div>
+        <div class="wick"></div>
+        <span class="number-shape">7</span>
+      </div>
+
+      <!-- 花 -->
+      <div class="cake-flower flower-left-one">🌸</div>
+      <div class="cake-flower flower-left-two">🌼</div>
+      <div class="cake-flower flower-right-one">🌸</div>
+      <div class="cake-flower flower-right-two">🌼</div>
+
+      <!-- ケーキ本体 -->
+      <div class="real-cake">
+        <div class="cake-surface"></div>
+
+        <div class="cake-decoration decoration-one"></div>
+        <div class="cake-decoration decoration-two"></div>
+        <div class="cake-decoration decoration-three"></div>
+        <div class="cake-decoration decoration-four"></div>
+
+        <div class="birthday-plate">
+          <span>HAPPY</span>
+          <span>BIRTHDAY</span>
+          <span class="plate-heart">♥</span>
+        </div>
+      </div>
+
+      <div class="real-cake-plate"></div>
+    </div>
+
+    <div class="sound-meter cake-meter">
+      <div class="meter-track">
+        <div id="meterFill" class="meter-fill"></div>
+      </div>
+
+      <p id="meterText">
+        マイクはまだオフです
       </p>
+    </div>
 
-      <div
-        id="cakeArea"
-        class="cake-area"
-        role="button"
-        tabindex="0"
-        aria-label="ケーキをタップしてロウソクを消す"
-      >
-        <div class="number-candles">
+    <button id="microphoneButton" class="main-button cake-main-button">
+      🎤 マイクをオンにする
+    </button>
 
-          <div class="number-candle">
-            <div class="flame"></div>
-            <span>2</span>
-          </div>
-
-          <div class="number-candle">
-            <div class="flame"></div>
-            <span>7</span>
-          </div>
-
-        </div>
-
-        <div class="cake">
-          <div class="cake-top"></div>
-          <div class="cream cream-one"></div>
-          <div class="cream cream-two"></div>
-
-          <div class="cake-text">
-            HAPPY<br>BIRTHDAY
-          </div>
-        </div>
-
-        <div class="plate"></div>
-      </div>
-
-      <div class="sound-meter">
-        <div class="meter-track">
-          <div id="meterFill" class="meter-fill"></div>
-        </div>
-
-        <p id="meterText">
-          マイクはまだオフです
-        </p>
-      </div>
-
-      <button id="microphoneButton" class="main-button">
-        🎤 マイクをオンにする
-      </button>
-    </section>
+    <button id="cakeTapButton" class="sub-button cake-sub-button">
+      うまく消えないときはタップ
+    </button>
+  </div>
+</section>
 
 
     <!-- プレゼント -->
