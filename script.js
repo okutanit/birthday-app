@@ -15,10 +15,8 @@ const startButton = document.getElementById("startButton");
 
 const cakeArea = document.getElementById("cakeArea");
 const cakeTapButton = document.getElementById("cakeTapButton");
-const microphoneButton =
-  document.getElementById("microphoneButton");
-const cakeInstruction =
-  document.getElementById("cakeInstruction");
+const microphoneButton = document.getElementById("microphoneButton");
+const cakeInstruction = document.getElementById("cakeInstruction");
 const meterFill = document.getElementById("meterFill");
 const meterText = document.getElementById("meterText");
 
@@ -34,8 +32,7 @@ const photoButton = document.getElementById("photoButton");
 const memoryPhoto = document.getElementById("memoryPhoto");
 const photoCaption = document.getElementById("photoCaption");
 const photoProgress = document.getElementById("photoProgress");
-const nextPhotoButton =
-  document.getElementById("nextPhotoButton");
+const nextPhotoButton = document.getElementById("nextPhotoButton");
 
 const creditButton = document.getElementById("creditButton");
 const envelope = document.getElementById("envelope");
@@ -56,6 +53,33 @@ let currentPhotoIndex = 0;
 const BLOW_THRESHOLD = 17;
 const REQUIRED_BLOW_FRAMES = 5;
 
+/*
+  動画表示用のvideoタグをJavaScriptで自動作成する。
+  index.htmlを修正しなくても動く。
+*/
+const photoFrame = memoryPhoto.closest(".photo-frame");
+
+const memoryVideo = document.createElement("video");
+
+memoryVideo.id = "memoryVideo";
+memoryVideo.muted = true;
+memoryVideo.loop = true;
+memoryVideo.autoplay = true;
+memoryVideo.playsInline = true;
+memoryVideo.setAttribute("playsinline", "");
+memoryVideo.setAttribute("webkit-playsinline", "");
+memoryVideo.preload = "metadata";
+
+memoryVideo.style.display = "none";
+memoryVideo.style.width = "100%";
+memoryVideo.style.height = "100%";
+memoryVideo.style.objectFit = "cover";
+
+photoFrame.appendChild(memoryVideo);
+
+/*
+  27本のバラに表示するメッセージ
+*/
 const roseMessages = [
   "笑顔がかわいいところ",
   "一緒にいると楽しいところ",
@@ -86,29 +110,42 @@ const roseMessages = [
   "生まれてきてくれてありがとう"
 ];
 
+/*
+  写真と動画の一覧
+
+  type: "image" → 静止画像
+  type: "video" → 動画
+
+  GitHub上のimagesフォルダに
+  同じファイル名でアップロードする。
+*/
 const photos = [
   {
-    src: "/images/IMG_6370.JPG",
+    type: "image",
+    src: "images/IMG_6370.JPG",
     caption: "一緒に過ごした大切な時間"
   },
   {
-    src: "/images/IMG_6374.JPG",
+    type: "image",
+    src: "images/IMG_6374.JPG",
     caption: "何気ない一日も、特別な思い出"
   },
   {
-    src: "/images/GCSL7009.MOV",
+    type: "video",
+    src: "images/GCSL7009.MOV",
     caption: "これからもいろんな場所へ行こうね"
   },
   {
-    src: "/images/IZLR4229.MOV",
+    type: "video",
+    src: "images/IZLR4229.MOV",
     caption: "一緒に笑えることが幸せです"
   },
   {
-    src: "/images/UHBP2581.MP4",
+    type: "video",
+    src: "images/UHBP2581.MP4",
     caption: "これからもたくさん思い出作ろうね"
   }
 ];
-
 
 function showScreen(screenName) {
   Object.values(screens).forEach((screen) => {
@@ -123,13 +160,11 @@ function showScreen(screenName) {
   });
 }
 
-
 function wait(milliseconds) {
   return new Promise((resolve) => {
     window.setTimeout(resolve, milliseconds);
   });
 }
-
 
 function createConfetti(pieceCount = 90) {
   const colors = [
@@ -141,25 +176,14 @@ function createConfetti(pieceCount = 90) {
     "#ff7f9f"
   ];
 
-  for (
-    let index = 0;
-    index < pieceCount;
-    index += 1
-  ) {
-    const piece =
-      document.createElement("span");
+  for (let index = 0; index < pieceCount; index += 1) {
+    const piece = document.createElement("span");
 
     piece.className = "confetti";
-
-    piece.style.left =
-      `${Math.random() * 100}vw`;
+    piece.style.left = `${Math.random() * 100}vw`;
 
     piece.style.backgroundColor =
-      colors[
-        Math.floor(
-          Math.random() * colors.length
-        )
-      ];
+      colors[Math.floor(Math.random() * colors.length)];
 
     piece.style.animationDuration =
       `${2.8 + Math.random() * 2.6}s`;
@@ -180,22 +204,17 @@ function createConfetti(pieceCount = 90) {
   }
 }
 
-
 async function startExperience() {
   startButton.disabled = true;
-
-  startButton.textContent =
-    "準備しています…";
+  startButton.textContent = "準備しています…";
 
   await wait(900);
 
   showScreen("cake");
 
   startButton.disabled = false;
-  startButton.textContent =
-    "物語を始める ▶";
+  startButton.textContent = "物語を始める ▶";
 }
-
 
 async function startMicrophone() {
   if (microphoneStarted || candlesAreOut) {
@@ -210,15 +229,13 @@ async function startMicrophone() {
       "このブラウザではマイクを使えません";
 
     cakeInstruction.innerHTML =
-      "ケーキをタップして<br>" +
-      "ロウソクを消してね";
+      "ケーキをタップして<br>ロウソクを消してね";
 
     return;
   }
 
   microphoneButton.disabled = true;
-  microphoneButton.textContent =
-    "マイクを準備中…";
+  microphoneButton.textContent = "マイクを準備中…";
 
   try {
     microphoneStream =
@@ -246,22 +263,18 @@ async function startMicrophone() {
       );
 
     analyser = audioContext.createAnalyser();
-
     analyser.fftSize = 2048;
     analyser.smoothingTimeConstant = 0.2;
 
     source.connect(analyser);
 
     microphoneStarted = true;
-
-    microphoneButton.textContent =
-      "🎤 マイク使用中";
+    microphoneButton.textContent = "🎤 マイク使用中";
 
     meterText.textContent =
       "iPhoneに向かって、ふーっとしてね";
 
     monitorMicrophone();
-
   } catch (error) {
     console.error(
       "マイクの開始に失敗しました:",
@@ -269,8 +282,7 @@ async function startMicrophone() {
     );
 
     microphoneButton.disabled = false;
-    microphoneButton.textContent =
-      "🎤 もう一度試す";
+    microphoneButton.textContent = "🎤 もう一度試す";
 
     meterText.textContent =
       "マイクを使えませんでした";
@@ -280,7 +292,6 @@ async function startMicrophone() {
       "ケーキをタップして消してね";
   }
 }
-
 
 function monitorMicrophone() {
   if (!analyser || candlesAreOut) {
@@ -302,14 +313,12 @@ function monitorMicrophone() {
     const normalized =
       (dataArray[index] - 128) / 128;
 
-    sumOfSquares +=
-      normalized * normalized;
+    sumOfSquares += normalized * normalized;
   }
 
   const rootMeanSquare =
     Math.sqrt(
-      sumOfSquares /
-      dataArray.length
+      sumOfSquares / dataArray.length
     );
 
   const volume =
@@ -318,14 +327,11 @@ function monitorMicrophone() {
       rootMeanSquare * 260
     );
 
-  meterFill.style.width =
-    `${volume}%`;
+  meterFill.style.width = `${volume}%`;
 
   if (volume >= BLOW_THRESHOLD) {
     blowFrameCount += 1;
-
-    meterText.textContent =
-      "そのまま、ふーっ！ 💨";
+    meterText.textContent = "そのまま、ふーっ！ 💨";
   } else {
     blowFrameCount = Math.max(
       0,
@@ -350,7 +356,6 @@ function monitorMicrophone() {
     );
 }
 
-
 async function blowOutCandles() {
   if (candlesAreOut) {
     return;
@@ -368,14 +373,12 @@ async function blowOutCandles() {
   cakeTapButton.disabled = true;
 
   stopMicrophone();
-
   createConfetti();
 
   await wait(1600);
 
   showScreen("gift");
 }
-
 
 function stopMicrophone() {
   if (microphoneAnimationId) {
@@ -406,11 +409,8 @@ function stopMicrophone() {
   microphoneStarted = false;
 }
 
-
 async function openGift() {
-  if (
-    giftBox.classList.contains("opened")
-  ) {
+  if (giftBox.classList.contains("opened")) {
     return;
   }
 
@@ -425,7 +425,6 @@ async function openGift() {
 
   showScreen("rose");
 }
-
 
 function addRose() {
   if (currentRoseCount >= 27) {
@@ -444,7 +443,9 @@ function addRose() {
     const fallback =
       document.createElement("span");
 
-    fallback.className = "rose rose-fallback";
+    fallback.className =
+      "rose rose-fallback";
+
     fallback.textContent = "🌹";
 
     rose.replaceWith(fallback);
@@ -474,84 +475,139 @@ function addRose() {
   }
 }
 
-
 function showPhotos() {
   currentPhotoIndex = 0;
 
-  updatePhoto();
-
   showScreen("photo");
+  updatePhoto();
 }
 
+function hideAllMedia() {
+  memoryVideo.pause();
+  memoryVideo.style.display = "none";
 
-function updatePhoto() {
-  const photo = photos[currentPhotoIndex];
+  memoryPhoto.style.display = "none";
+}
+
+function showImage(item) {
+  hideAllMedia();
 
   memoryPhoto.classList.add("changing");
 
-  window.setTimeout(() => {
-    memoryPhoto.src = photo.src;
+  memoryPhoto.onload = () => {
+    memoryPhoto.classList.remove("changing");
+  };
 
-    memoryPhoto.onerror = () => {
-      memoryPhoto.src =
-        "data:image/svg+xml;charset=UTF-8," +
-        encodeURIComponent(`
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="600"
-            height="800"
+  memoryPhoto.onerror = () => {
+    console.error(
+      `画像を読み込めませんでした: ${item.src}`
+    );
+
+    memoryPhoto.src =
+      "data:image/svg+xml;charset=UTF-8," +
+      encodeURIComponent(`
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="600"
+          height="800"
+        >
+          <rect
+            width="100%"
+            height="100%"
+            fill="#f5dce8"
+          />
+
+          <text
+            x="50%"
+            y="45%"
+            text-anchor="middle"
+            font-size="35"
+            fill="#a65d80"
           >
-            <rect
-              width="100%"
-              height="100%"
-              fill="#f5dce8"
-            />
+            写真を確認してね
+          </text>
 
-            <text
-              x="50%"
-              y="45%"
-              text-anchor="middle"
-              font-size="35"
-              fill="#a65d80"
-            >
-              写真を入れてね
-            </text>
-
-            <text
-              x="50%"
-              y="52%"
-              text-anchor="middle"
-              font-size="80"
-            >
-              📷
-            </text>
-          </svg>
-        `);
-    };
-
-    photoCaption.textContent =
-      photo.caption;
-
-    photoProgress.textContent =
-      `${currentPhotoIndex + 1} / ${photos.length}`;
+          <text
+            x="50%"
+            y="55%"
+            text-anchor="middle"
+            font-size="80"
+          >
+            📷
+          </text>
+        </svg>
+      `);
 
     memoryPhoto.classList.remove("changing");
+  };
 
-    if (
-      currentPhotoIndex ===
-      photos.length - 1
-    ) {
-      nextPhotoButton.textContent =
-        "最後のメッセージへ 💖";
-    } else {
-      nextPhotoButton.textContent =
-        "次の写真へ →";
-    }
-  }, 350);
+  memoryPhoto.src = item.src;
+  memoryPhoto.style.display = "block";
 }
 
+function showVideo(item) {
+  hideAllMedia();
+
+  memoryVideo.src = item.src;
+  memoryVideo.style.display = "block";
+  memoryVideo.currentTime = 0;
+
+  memoryVideo.onerror = () => {
+    console.error(
+      `動画を再生できませんでした: ${item.src}`
+    );
+
+    photoCaption.textContent =
+      "動画を再生できませんでした。MP4形式を確認してね。";
+  };
+
+  memoryVideo.play().catch((error) => {
+    console.warn(
+      "動画の自動再生に失敗しました:",
+      error
+    );
+
+    /*
+      iPhoneで自動再生されない場合、
+      動画をタップすれば再生できるようにする。
+    */
+    memoryVideo.controls = true;
+  });
+}
+
+function updatePhoto() {
+  const item = photos[currentPhotoIndex];
+
+  if (!item) {
+    return;
+  }
+
+  photoCaption.textContent = item.caption;
+
+  photoProgress.textContent =
+    `${currentPhotoIndex + 1} / ${photos.length}`;
+
+  if (item.type === "video") {
+    showVideo(item);
+  } else {
+    showImage(item);
+  }
+
+  if (
+    currentPhotoIndex ===
+    photos.length - 1
+  ) {
+    nextPhotoButton.textContent =
+      "最後のメッセージへ 💖";
+  } else {
+    nextPhotoButton.textContent =
+      "次の思い出へ →";
+  }
+}
 
 function showNextPhoto() {
+  memoryVideo.pause();
+
   if (
     currentPhotoIndex <
     photos.length - 1
@@ -562,10 +618,8 @@ function showNextPhoto() {
   }
 
   createConfetti(100);
-
   showScreen("final");
 }
-
 
 function startCredits() {
   showScreen("credit");
@@ -575,13 +629,18 @@ function startCredits() {
   }, 16000);
 }
 
-
 function resetExperience() {
   stopMicrophone();
+
+  memoryVideo.pause();
+  memoryVideo.removeAttribute("src");
+  memoryVideo.load();
+  memoryVideo.controls = false;
 
   candlesAreOut = false;
   microphoneStarted = false;
   blowFrameCount = 0;
+
   currentRoseCount = 0;
   currentPhotoIndex = 0;
 
@@ -602,16 +661,17 @@ function resetExperience() {
 
   roseGarden.innerHTML = "";
   roseCount.textContent = "0 / 27";
+
   roseMessage.textContent =
     "1本ずつ、気持ちを込めました";
 
   addRoseButton.disabled = false;
+
   addRoseButton.textContent =
     "🌹 バラを受け取る";
 
   showScreen("opening");
 }
-
 
 startButton.addEventListener(
   "click",
@@ -685,5 +745,8 @@ replayButton.addEventListener(
 
 window.addEventListener(
   "pagehide",
-  stopMicrophone
+  () => {
+    stopMicrophone();
+    memoryVideo.pause();
+  }
 );
