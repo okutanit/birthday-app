@@ -53,9 +53,9 @@ let currentPhotoIndex = 0;
 const BLOW_THRESHOLD = 17;
 const REQUIRED_BLOW_FRAMES = 5;
 
+
 /*
   動画表示用のvideoタグをJavaScriptで自動作成する。
-  index.htmlを修正しなくても動く。
 */
 const photoFrame = memoryPhoto.closest(".photo-frame");
 
@@ -66,8 +66,10 @@ memoryVideo.muted = true;
 memoryVideo.loop = true;
 memoryVideo.autoplay = true;
 memoryVideo.playsInline = true;
+
 memoryVideo.setAttribute("playsinline", "");
 memoryVideo.setAttribute("webkit-playsinline", "");
+
 memoryVideo.preload = "metadata";
 
 memoryVideo.style.display = "none";
@@ -76,6 +78,7 @@ memoryVideo.style.height = "100%";
 memoryVideo.style.objectFit = "cover";
 
 photoFrame.appendChild(memoryVideo);
+
 
 /*
   27本のバラに表示するメッセージ
@@ -110,14 +113,12 @@ const roseMessages = [
   "いつか一緒にいたいな"
 ];
 
+
 /*
   写真と動画の一覧
 
   type: "image" → 静止画像
   type: "video" → 動画
-
-  GitHub上のimagesフォルダに
-  同じファイル名でアップロードする。
 */
 const photos = [
   {
@@ -147,6 +148,10 @@ const photos = [
   }
 ];
 
+
+/*
+  画面切り替え
+*/
 function showScreen(screenName) {
   Object.values(screens).forEach((screen) => {
     screen.classList.remove("active");
@@ -160,12 +165,20 @@ function showScreen(screenName) {
   });
 }
 
+
+/*
+  待機処理
+*/
 function wait(milliseconds) {
   return new Promise((resolve) => {
     window.setTimeout(resolve, milliseconds);
   });
 }
 
+
+/*
+  花びら演出
+*/
 function createConfetti(pieceCount = 55) {
   const petalColors = [
     "#ffd1df",
@@ -180,8 +193,7 @@ function createConfetti(pieceCount = 55) {
     index < pieceCount;
     index += 1
   ) {
-    const petal =
-      document.createElement("span");
+    const petal = document.createElement("span");
 
     petal.className = "flower-petal";
 
@@ -191,8 +203,7 @@ function createConfetti(pieceCount = 55) {
     petal.style.backgroundColor =
       petalColors[
         Math.floor(
-          Math.random() *
-          petalColors.length
+          Math.random() * petalColors.length
         )
       ];
 
@@ -217,13 +228,13 @@ function createConfetti(pieceCount = 55) {
     );
 
     petal.style.setProperty(
-      "--petal-rotate",
-      `${360 + Math.random() * 720}deg`
+      "--petal-sway",
+      `${20 + Math.random() * 50}px`
     );
 
     petal.style.setProperty(
-      "--petal-sway",
-      `${20 + Math.random() * 50}px`
+      "--petal-rotate",
+      `${360 + Math.random() * 720}deg`
     );
 
     document.body.appendChild(petal);
@@ -241,9 +252,11 @@ function createConfetti(pieceCount = 55) {
   );
 }
 
-function createSparkles(
-  sparkleCount = 6
-) {
+
+/*
+  キラキラ演出
+*/
+function createSparkles(sparkleCount = 6) {
   const sparkleSymbols = [
     "✨",
     "✦",
@@ -255,17 +268,14 @@ function createSparkles(
     index < sparkleCount;
     index += 1
   ) {
-    const sparkle =
-      document.createElement("span");
+    const sparkle = document.createElement("span");
 
-    sparkle.className =
-      "flower-sparkle";
+    sparkle.className = "flower-sparkle";
 
     sparkle.textContent =
       sparkleSymbols[
         Math.floor(
-          Math.random() *
-          sparkleSymbols.length
+          Math.random() * sparkleSymbols.length
         )
       ];
 
@@ -278,9 +288,7 @@ function createSparkles(
     sparkle.style.animationDelay =
       `${Math.random() * 0.7}s`;
 
-    document.body.appendChild(
-      sparkle
-    );
+    document.body.appendChild(sparkle);
 
     window.setTimeout(() => {
       sparkle.remove();
@@ -288,48 +296,35 @@ function createSparkles(
   }
 }
 
-  for (let index = 0; index < pieceCount; index += 1) {
-    const piece = document.createElement("span");
 
-    piece.className = "confetti";
-    piece.style.left = `${Math.random() * 100}vw`;
-
-    piece.style.backgroundColor =
-      colors[Math.floor(Math.random() * colors.length)];
-
-    piece.style.animationDuration =
-      `${2.8 + Math.random() * 2.6}s`;
-
-    piece.style.animationDelay =
-      `${Math.random() * 0.7}s`;
-
-    piece.style.setProperty(
-      "--drift",
-      `${-130 + Math.random() * 260}px`
-    );
-
-    document.body.appendChild(piece);
-
-    window.setTimeout(() => {
-      piece.remove();
-    }, 6500);
-  }
-}
-
+/*
+  オープニング開始
+*/
 async function startExperience() {
   startButton.disabled = true;
-  startButton.textContent = "ちょっと待ってね";
+
+  startButton.textContent =
+    "ちょっと待ってね";
 
   await wait(900);
 
   showScreen("cake");
 
   startButton.disabled = false;
-  startButton.textContent = "物語を始める ▶";
+
+  startButton.textContent =
+    "物語を始める ▶";
 }
 
+
+/*
+  マイク開始
+*/
 async function startMicrophone() {
-  if (microphoneStarted || candlesAreOut) {
+  if (
+    microphoneStarted ||
+    candlesAreOut
+  ) {
     return;
   }
 
@@ -341,13 +336,16 @@ async function startMicrophone() {
       "このブラウザではマイクを使えません";
 
     cakeInstruction.innerHTML =
-      "ケーキをタップして<br>ロウソクを消してね";
+      "ケーキをタップして<br>" +
+      "ロウソクを消してね";
 
     return;
   }
 
   microphoneButton.disabled = true;
-  microphoneButton.textContent = "マイクを準備中…";
+
+  microphoneButton.textContent =
+    "マイクを準備中…";
 
   try {
     microphoneStream =
@@ -363,9 +361,12 @@ async function startMicrophone() {
       window.AudioContext ||
       window.webkitAudioContext;
 
-    audioContext = new AudioContextClass();
+    audioContext =
+      new AudioContextClass();
 
-    if (audioContext.state === "suspended") {
+    if (
+      audioContext.state === "suspended"
+    ) {
       await audioContext.resume();
     }
 
@@ -374,14 +375,20 @@ async function startMicrophone() {
         microphoneStream
       );
 
-    analyser = audioContext.createAnalyser();
+    analyser =
+      audioContext.createAnalyser();
+
     analyser.fftSize = 2048;
-    analyser.smoothingTimeConstant = 0.2;
+
+    analyser.smoothingTimeConstant =
+      0.2;
 
     source.connect(analyser);
 
     microphoneStarted = true;
-    microphoneButton.textContent = "🎤 マイク使用中";
+
+    microphoneButton.textContent =
+      "🎤 マイク使用中";
 
     meterText.textContent =
       "iPhoneに向かって、ふーっとしてね";
@@ -394,7 +401,9 @@ async function startMicrophone() {
     );
 
     microphoneButton.disabled = false;
-    microphoneButton.textContent = "🎤 もう一度試す";
+
+    microphoneButton.textContent =
+      "🎤 もう一度試す";
 
     meterText.textContent =
       "マイクを使えませんでした";
@@ -405,15 +414,26 @@ async function startMicrophone() {
   }
 }
 
+
+/*
+  マイク音量監視
+*/
 function monitorMicrophone() {
-  if (!analyser || candlesAreOut) {
+  if (
+    !analyser ||
+    candlesAreOut
+  ) {
     return;
   }
 
   const dataArray =
-    new Uint8Array(analyser.fftSize);
+    new Uint8Array(
+      analyser.fftSize
+    );
 
-  analyser.getByteTimeDomainData(dataArray);
+  analyser.getByteTimeDomainData(
+    dataArray
+  );
 
   let sumOfSquares = 0;
 
@@ -425,12 +445,14 @@ function monitorMicrophone() {
     const normalized =
       (dataArray[index] - 128) / 128;
 
-    sumOfSquares += normalized * normalized;
+    sumOfSquares +=
+      normalized * normalized;
   }
 
   const rootMeanSquare =
     Math.sqrt(
-      sumOfSquares / dataArray.length
+      sumOfSquares /
+      dataArray.length
     );
 
   const volume =
@@ -439,16 +461,22 @@ function monitorMicrophone() {
       rootMeanSquare * 260
     );
 
-  meterFill.style.width = `${volume}%`;
+  meterFill.style.width =
+    `${volume}%`;
 
-  if (volume >= BLOW_THRESHOLD) {
+  if (
+    volume >= BLOW_THRESHOLD
+  ) {
     blowFrameCount += 1;
-    meterText.textContent = "そのまま、ふーっ！ 💨";
+
+    meterText.textContent =
+      "そのまま、ふーっ！ 💨";
   } else {
-    blowFrameCount = Math.max(
-      0,
-      blowFrameCount - 1
-    );
+    blowFrameCount =
+      Math.max(
+        0,
+        blowFrameCount - 1
+      );
 
     meterText.textContent =
       "iPhoneに向かって、ふーっとしてね";
@@ -468,6 +496,10 @@ function monitorMicrophone() {
     );
 }
 
+
+/*
+  ロウソクを消す
+*/
 async function blowOutCandles() {
   if (candlesAreOut) {
     return;
@@ -475,9 +507,13 @@ async function blowOutCandles() {
 
   candlesAreOut = true;
 
-  cakeArea.classList.add("blown-out");
+  cakeArea.classList.add(
+    "blown-out"
+  );
 
-  meterFill.style.width = "100%";
+  meterFill.style.width =
+    "100%";
+
   meterText.textContent =
     "ロウソクが消えたよ！ 🎉";
 
@@ -485,13 +521,18 @@ async function blowOutCandles() {
   cakeTapButton.disabled = true;
 
   stopMicrophone();
-  createConfetti();
+
+  createConfetti(55);
 
   await wait(1600);
 
   showScreen("gift");
 }
 
+
+/*
+  マイク停止
+*/
 function stopMicrophone() {
   if (microphoneAnimationId) {
     cancelAnimationFrame(
@@ -512,7 +553,9 @@ function stopMicrophone() {
   }
 
   if (audioContext) {
-    audioContext.close().catch(() => {});
+    audioContext
+      .close()
+      .catch(() => {});
 
     audioContext = null;
   }
@@ -521,30 +564,48 @@ function stopMicrophone() {
   microphoneStarted = false;
 }
 
+
+/*
+  プレゼントを開ける
+*/
 async function openGift() {
-  if (giftBox.classList.contains("opened")) {
+  if (
+    giftBox.classList.contains(
+      "opened"
+    )
+  ) {
     return;
   }
 
-  giftBox.classList.add("opened");
+  giftBox.classList.add(
+    "opened"
+  );
 
   if (giftMessage) {
-    giftMessage.textContent = "まだプレゼントは続きます… 🌹";
+    giftMessage.textContent =
+      "まだプレゼントは続きます… 🌹";
   }
 
-  createConfetti(45);
+  createConfetti(40);
 
   await wait(1900);
 
   showScreen("rose");
 }
 
+
+/*
+  バラを1本ずつ追加
+*/
 function addRose() {
-  if (currentRoseCount >= 27) {
+  if (
+    currentRoseCount >= 27
+  ) {
     return;
   }
 
-  const rose = document.createElement("span");
+  const rose =
+    document.createElement("span");
 
   rose.className = "rose";
   rose.textContent = "🌹";
@@ -562,9 +623,13 @@ function addRose() {
     `${currentRoseCount} / 27`;
 
   roseMessage.textContent =
-    roseMessages[currentRoseCount - 1];
+    roseMessages[
+      currentRoseCount - 1
+    ];
 
-  if (currentRoseCount === 27) {
+  if (
+    currentRoseCount === 27
+  ) {
     addRoseButton.disabled = true;
 
     addRoseButton.textContent =
@@ -574,33 +639,53 @@ function addRose() {
       showScreen("bouquet");
 
       window.setTimeout(() => {
-        createConfetti(120);
+        createConfetti(90);
       }, 300);
     }, 2200);
   }
 }
 
+
+/*
+  写真画面開始
+*/
 function showPhotos() {
   currentPhotoIndex = 0;
 
   showScreen("photo");
+
   updatePhoto();
 }
 
+
+/*
+  写真・動画を非表示
+*/
 function hideAllMedia() {
   memoryVideo.pause();
-  memoryVideo.style.display = "none";
 
-  memoryPhoto.style.display = "none";
+  memoryVideo.style.display =
+    "none";
+
+  memoryPhoto.style.display =
+    "none";
 }
 
+
+/*
+  写真表示
+*/
 function showImage(item) {
   hideAllMedia();
 
-  memoryPhoto.classList.add("changing");
+  memoryPhoto.classList.add(
+    "changing"
+  );
 
   memoryPhoto.onload = () => {
-    memoryPhoto.classList.remove("changing");
+    memoryPhoto.classList.remove(
+      "changing"
+    );
   };
 
   memoryPhoto.onerror = () => {
@@ -643,18 +728,29 @@ function showImage(item) {
         </svg>
       `);
 
-    memoryPhoto.classList.remove("changing");
+    memoryPhoto.classList.remove(
+      "changing"
+    );
   };
 
   memoryPhoto.src = item.src;
-  memoryPhoto.style.display = "block";
+
+  memoryPhoto.style.display =
+    "block";
 }
 
+
+/*
+  動画表示
+*/
 function showVideo(item) {
   hideAllMedia();
 
   memoryVideo.src = item.src;
-  memoryVideo.style.display = "block";
+
+  memoryVideo.style.display =
+    "block";
+
   memoryVideo.currentTime = 0;
 
   memoryVideo.onerror = () => {
@@ -663,36 +759,43 @@ function showVideo(item) {
     );
 
     photoCaption.textContent =
-      "動画を再生できませんでした。MP4形式を確認してね。";
+      "動画を再生できませんでした。" +
+      "MP4形式を確認してね。";
   };
 
-  memoryVideo.play().catch((error) => {
-    console.warn(
-      "動画の自動再生に失敗しました:",
-      error
-    );
+  memoryVideo
+    .play()
+    .catch((error) => {
+      console.warn(
+        "動画の自動再生に失敗しました:",
+        error
+      );
 
-    /*
-      iPhoneで自動再生されない場合、
-      動画をタップすれば再生できるようにする。
-    */
-    memoryVideo.controls = true;
-  });
+      memoryVideo.controls = true;
+    });
 }
 
+
+/*
+  写真・動画更新
+*/
 function updatePhoto() {
-  const item = photos[currentPhotoIndex];
+  const item =
+    photos[currentPhotoIndex];
 
   if (!item) {
     return;
   }
 
-  photoCaption.textContent = item.caption;
+  photoCaption.textContent =
+    item.caption;
 
   photoProgress.textContent =
     `${currentPhotoIndex + 1} / ${photos.length}`;
 
-  if (item.type === "video") {
+  if (
+    item.type === "video"
+  ) {
     showVideo(item);
   } else {
     showImage(item);
@@ -710,6 +813,10 @@ function updatePhoto() {
   }
 }
 
+
+/*
+  次の写真・動画へ
+*/
 function showNextPhoto() {
   memoryVideo.pause();
 
@@ -718,14 +825,21 @@ function showNextPhoto() {
     photos.length - 1
   ) {
     currentPhotoIndex += 1;
+
     updatePhoto();
+
     return;
   }
 
-  createConfetti(100);
+  createConfetti(75);
+
   showScreen("final");
 }
 
+
+/*
+  エンドロール開始
+*/
 function startCredits() {
   showScreen("credit");
 
@@ -734,12 +848,21 @@ function startCredits() {
   }, 16000);
 }
 
+
+/*
+  最初からやり直す
+*/
 function resetExperience() {
   stopMicrophone();
 
   memoryVideo.pause();
-  memoryVideo.removeAttribute("src");
+
+  memoryVideo.removeAttribute(
+    "src"
+  );
+
   memoryVideo.load();
+
   memoryVideo.controls = false;
 
   candlesAreOut = false;
@@ -749,37 +872,55 @@ function resetExperience() {
   currentRoseCount = 0;
   currentPhotoIndex = 0;
 
-  cakeArea.classList.remove("blown-out");
+  cakeArea.classList.remove(
+    "blown-out"
+  );
 
-  meterFill.style.width = "0%";
+  meterFill.style.width =
+    "0%";
+
   meterText.textContent =
     "マイクはまだオフです";
 
-  microphoneButton.disabled = false;
+  microphoneButton.disabled =
+    false;
+
   microphoneButton.textContent =
     "🎤 マイクをオンにする";
 
-  cakeTapButton.disabled = false;
+  cakeTapButton.disabled =
+    false;
 
-  giftBox.classList.remove("opened");
+  giftBox.classList.remove(
+    "opened"
+  );
+
   if (giftMessage) {
-    giftMessage.textContent = "🎁";
+    giftMessage.textContent =
+      "🎁";
   }
 
   roseGarden.innerHTML = "";
-  roseCount.textContent = "0 / 27";
+
+  roseCount.textContent =
+    "0 / 27";
 
   roseMessage.textContent =
-    "1本ずつ、気持ちを込めました";
+    "1本ずつ気持ちを込めて作ってみた";
 
-  addRoseButton.disabled = false;
+  addRoseButton.disabled =
+    false;
 
   addRoseButton.textContent =
-    "🌹 バラを受け取る";
+    "🌹 バラを受け取る 🌹";
 
   showScreen("opening");
 }
 
+
+/*
+  イベント設定
+*/
 startButton.addEventListener(
   "click",
   startExperience
@@ -808,6 +949,7 @@ cakeArea.addEventListener(
       event.key === " "
     ) {
       event.preventDefault();
+
       blowOutCandles();
     }
   }
@@ -850,10 +992,15 @@ replayButton.addEventListener(
   resetExperience
 );
 
+
+/*
+  ページを閉じるときにマイクと動画を停止
+*/
 window.addEventListener(
   "pagehide",
   () => {
     stopMicrophone();
+
     memoryVideo.pause();
   }
 );
