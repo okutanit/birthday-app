@@ -432,25 +432,15 @@ function addRose() {
     return;
   }
 
-  const rose =
-    document.createElement("img");
+  const rose = document.createElement("span");
 
   rose.className = "rose";
-  rose.src = "images/rose.png";
-  rose.alt =
-    `${currentRoseCount + 1}本目の赤いバラ`;
+  rose.textContent = "🌹";
 
-  rose.onerror = () => {
-    const fallback =
-      document.createElement("span");
-
-    fallback.className =
-      "rose rose-fallback";
-
-    fallback.textContent = "🌹";
-
-    rose.replaceWith(fallback);
-  };
+  rose.setAttribute(
+    "aria-label",
+    `${currentRoseCount + 1}本目の赤いバラ`
+  );
 
   roseGarden.appendChild(rose);
 
