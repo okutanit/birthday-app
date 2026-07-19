@@ -337,14 +337,14 @@ h2 {
   birthday-cake1.png（1536×1152前提）の炎位置。
   少しズレる場合は left だけ0.5%ずつ調整。
 */
-.flame-two {
-  top: 1.8%;
-  left: 35.7%;
+.flame-two{
+    top: 8%;
+    left: 36%;
 }
 
-.flame-seven {
-  top: 1.8%;
-  left: 56.7%;
+.flame-seven{
+    top: 8%;
+    left: 61%;
 }
 
 @keyframes elegantFlame {
