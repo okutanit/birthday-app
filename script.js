@@ -462,7 +462,9 @@ function addRose() {
 
     window.setTimeout(() => {
       showScreen("bouquet");
-    }, 2200);
+      setTimeout(() => {
+    createConfetti(120);
+    }, 300);
   }
 }
 
