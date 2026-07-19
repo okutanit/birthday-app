@@ -256,11 +256,7 @@ h2 {
 .cake-heading {
   margin: 0 0 10px;
   color: #28152f;
-  font-family:
-    Georgia,
-    "Yu Mincho",
-    "Hiragino Mincho ProN",
-    serif;
+ font-family: "Kaisei Decol", serif;
   font-size: clamp(29px, 7vw, 43px);
   font-weight: 700;
   line-height: 1.35;
