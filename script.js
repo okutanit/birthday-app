@@ -479,7 +479,7 @@ function monitorMicrophone() {
       );
 
     meterText.textContent =
-      "iPhoneに向かって、ふーっとしてね";
+      "iPhoneに向かって、ふーってして";
   }
 
   if (
@@ -515,7 +515,7 @@ async function blowOutCandles() {
     "100%";
 
   meterText.textContent =
-    "ロウソクが消えたよ！ 🎉";
+    "ロウソク消えたよー 🎉";
 
   microphoneButton.disabled = true;
   cakeTapButton.disabled = true;
@@ -583,7 +583,7 @@ async function openGift() {
 
   if (giftMessage) {
     giftMessage.textContent =
-      "まだプレゼントは続きます… 🌹";
+      "まだプレゼントまだあるよー… 🌹";
   }
 
   createConfetti(40);
