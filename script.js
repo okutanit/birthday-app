@@ -166,15 +166,127 @@ function wait(milliseconds) {
   });
 }
 
-function createConfetti(pieceCount = 90) {
-  const colors = [
-    "#ec4899",
-    "#c65bd4",
-    "#f6c453",
-    "#65a8ff",
-    "#54cf9e",
-    "#ff7f9f"
+function createConfetti(pieceCount = 55) {
+  const petalColors = [
+    "#ffd1df",
+    "#ffb8cf",
+    "#f48fb1",
+    "#fff4f7",
+    "#e86a9b"
   ];
+
+  for (
+    let index = 0;
+    index < pieceCount;
+    index += 1
+  ) {
+    const petal =
+      document.createElement("span");
+
+    petal.className = "flower-petal";
+
+    petal.style.left =
+      `${Math.random() * 100}vw`;
+
+    petal.style.backgroundColor =
+      petalColors[
+        Math.floor(
+          Math.random() *
+          petalColors.length
+        )
+      ];
+
+    const size =
+      10 + Math.random() * 12;
+
+    petal.style.width =
+      `${size}px`;
+
+    petal.style.height =
+      `${size * 0.72}px`;
+
+    petal.style.animationDuration =
+      `${4.5 + Math.random() * 3.5}s`;
+
+    petal.style.animationDelay =
+      `${Math.random() * 0.9}s`;
+
+    petal.style.setProperty(
+      "--petal-drift",
+      `${-160 + Math.random() * 320}px`
+    );
+
+    petal.style.setProperty(
+      "--petal-rotate",
+      `${360 + Math.random() * 720}deg`
+    );
+
+    petal.style.setProperty(
+      "--petal-sway",
+      `${20 + Math.random() * 50}px`
+    );
+
+    document.body.appendChild(petal);
+
+    window.setTimeout(() => {
+      petal.remove();
+    }, 9000);
+  }
+
+  createSparkles(
+    Math.max(
+      4,
+      Math.floor(pieceCount / 10)
+    )
+  );
+}
+
+function createSparkles(
+  sparkleCount = 6
+) {
+  const sparkleSymbols = [
+    "✨",
+    "✦",
+    "⋆"
+  ];
+
+  for (
+    let index = 0;
+    index < sparkleCount;
+    index += 1
+  ) {
+    const sparkle =
+      document.createElement("span");
+
+    sparkle.className =
+      "flower-sparkle";
+
+    sparkle.textContent =
+      sparkleSymbols[
+        Math.floor(
+          Math.random() *
+          sparkleSymbols.length
+        )
+      ];
+
+    sparkle.style.left =
+      `${8 + Math.random() * 84}vw`;
+
+    sparkle.style.top =
+      `${10 + Math.random() * 45}vh`;
+
+    sparkle.style.animationDelay =
+      `${Math.random() * 0.7}s`;
+
+    document.body.appendChild(
+      sparkle
+    );
+
+    window.setTimeout(() => {
+      sparkle.remove();
+    }, 2600);
+  }
+}
 
   for (let index = 0; index < pieceCount; index += 1) {
     const piece = document.createElement("span");
