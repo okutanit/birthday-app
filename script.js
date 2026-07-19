@@ -458,13 +458,13 @@ function addRose() {
     addRoseButton.textContent =
       "27本のバラがそろいました 💖";
 
-    createConfetti(80);
-
     window.setTimeout(() => {
       showScreen("bouquet");
-      setTimeout(() => {
-    createConfetti(120);
-    }, 300);
+
+      window.setTimeout(() => {
+        createConfetti(120);
+      }, 300);
+    }, 2200);
   }
 }
 
