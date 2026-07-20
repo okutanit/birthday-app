@@ -37,6 +37,10 @@ const nextPhotoButton = document.getElementById("nextPhotoButton");
 const creditButton = document.getElementById("creditButton");
 const envelope = document.getElementById("envelope");
 const replayButton = document.getElementById("replayButton");
+const letterPaper = document.getElementById("letterPaper");
+const typewriterTargets = Array.from(document.querySelectorAll(".typewriter-target"));
+const typewriterOriginalTexts = typewriterTargets.map((element) => element.innerText.trim());
+let typewriterRunId = 0;
 
 let audioContext = null;
 let analyser = null;
@@ -400,6 +404,57 @@ function createSparkles(sparkleCount = 6) {
   }
 }
 
+
+/*
+  手紙のタイプライター表示
+*/
+function clearTypewriterText() {
+  typewriterRunId += 1;
+  letterPaper.classList.remove("typing", "typing-complete");
+  typewriterTargets.forEach((element) => { element.textContent = ""; });
+  replayButton.style.visibility = "hidden";
+}
+
+async function typeText(element, text, runId, characterDelay = 52) {
+  for (let index = 0; index < text.length; index += 1) {
+    if (runId !== typewriterRunId) return false;
+    element.textContent += text[index];
+    const character = text[index];
+    let delay = characterDelay;
+    if ("。！？".includes(character)) delay = 260;
+    else if (character === "、" || character === "\n") delay = 130;
+    await wait(delay);
+  }
+  return true;
+}
+
+async function startLetterTypewriter() {
+  clearTypewriterText();
+  const runId = typewriterRunId;
+  letterPaper.classList.add("typing");
+
+  for (let index = 0; index < typewriterTargets.length; index += 1) {
+    const completed = await typeText(
+      typewriterTargets[index],
+      typewriterOriginalTexts[index],
+      runId,
+      index === 0 ? 75 : 48
+    );
+    if (!completed) return;
+    await wait(index === 0 ? 380 : 520);
+  }
+
+  if (runId !== typewriterRunId) return;
+  letterPaper.classList.remove("typing");
+  letterPaper.classList.add("typing-complete");
+  replayButton.style.visibility = "visible";
+  createSparkles(7);
+}
+
+function openLetter() {
+  showScreen("message");
+  window.setTimeout(startLetterTypewriter, 450);
+}
 
 /*
   オープニング開始
@@ -1018,6 +1073,7 @@ function resetExperience() {
   addRoseButton.textContent =
     "🌹 バラを受け取る 🌹";
 
+  clearTypewriterText();
   showScreen("opening");
 }
 
@@ -1084,18 +1140,32 @@ creditButton.addEventListener(
   startCredits
 );
 
-envelope.addEventListener(
-  "click",
-  () => {
-    showScreen("message");
+envelope.addEventListener("click", openLetter);
+envelope.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    openLetter();
   }
-);
+});
 
 replayButton.addEventListener(
   "click",
   resetExperience
 );
 
+
+/* ボタンを押したときの沈み込み */
+document.querySelectorAll(".main-button, .sub-button").forEach((button) => {
+  const releaseButton = () => button.classList.remove("button-pressed");
+  button.addEventListener("pointerdown", () => {
+    if (!button.disabled) button.classList.add("button-pressed");
+  });
+  button.addEventListener("pointerup", releaseButton);
+  button.addEventListener("pointercancel", releaseButton);
+  button.addEventListener("pointerleave", releaseButton);
+});
+
+clearTypewriterText();
 
 /*
   ページを閉じるときにマイクと動画を停止

@@ -118,20 +118,28 @@ h2 {
   z-index: 10;
   width: 100%;
   max-width: 340px;
+  overflow: hidden;
   border: 0;
   border-radius: 999px;
   cursor: pointer;
+  isolation: isolate;
+  transform: translateY(0) scale(1);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    opacity 0.18s ease;
+    transform 0.16s cubic-bezier(.2, .8, .2, 1),
+    box-shadow 0.16s ease,
+    opacity 0.18s ease,
+    filter 0.18s ease;
 }
 
 .main-button {
   padding: 15px 24px;
   color: white;
   background: linear-gradient(135deg, #e94b8f, #ad4ed3);
-  box-shadow: 0 14px 35px rgba(221, 73, 157, 0.3);
+  box-shadow:
+    0 14px 35px rgba(221, 73, 157, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
   font-size: 16px;
   font-weight: 800;
 }
@@ -142,20 +150,54 @@ h2 {
   color: #7b5975;
   background: white;
   border: 1px solid #ead8e7;
+  box-shadow: 0 9px 22px rgba(111, 73, 105, 0.11);
   font-size: 14px;
   font-weight: 700;
 }
 
-.main-button:active,
-.sub-button:active {
-  transform: scale(0.97);
+.main-button::before,
+.sub-button::before {
+  content: "";
+  position: absolute;
+  top: -35%;
+  left: -55%;
+  z-index: -1;
+  width: 38%;
+  height: 170%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.58), transparent);
+  transform: skewX(-22deg);
+  transition: left .55s ease;
 }
 
+.main-button:hover::before,
+.main-button:focus-visible::before,
+.sub-button:hover::before,
+.sub-button:focus-visible::before { left: 120%; }
+
+.main-button:hover,
+.main-button:focus-visible,
+.sub-button:hover,
+.sub-button:focus-visible { transform: translateY(-2px); filter: brightness(1.04); }
+
+.main-button:active,
+.sub-button:active,
+.main-button.button-pressed,
+.sub-button.button-pressed { transform: translateY(3px) scale(.975); }
+
+.main-button:active,
+.main-button.button-pressed { box-shadow: 0 6px 16px rgba(221,73,157,.25), inset 0 2px 5px rgba(92,29,88,.16); }
+
+.sub-button:active,
+.sub-button.button-pressed { box-shadow: 0 4px 12px rgba(111,73,105,.11), inset 0 2px 5px rgba(92,54,83,.08); }
+
+.main-button:focus-visible,
+.sub-button:focus-visible { outline: 3px solid rgba(225,91,157,.28); outline-offset: 4px; }
+
 .main-button:disabled,
-.sub-button:disabled {
-  opacity: 0.55;
-  cursor: default;
-}
+.sub-button:disabled { opacity: .55; cursor: default; filter: none; transform: none; }
+.main-button:disabled::before,
+.sub-button:disabled::before { display: none; }
 
 /* 星 */
 .stars,
@@ -1095,6 +1137,29 @@ font-family: "Zen Maru Gothic", sans-serif;
       rotate(30deg)
       translateY(-20px);
   }
+}
+
+
+/* タイプライター手紙 */
+#messageScreen { justify-content: flex-start; padding-top: max(42px, env(safe-area-inset-top)); }
+.letter-paper { position: relative; }
+.typewriter-target { white-space: pre-line; }
+.letter-paper.typing::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1.15em;
+  margin-left: 4px;
+  vertical-align: -.16em;
+  background: #d24080;
+  animation: typingCursor .75s steps(1) infinite;
+}
+.letter-paper.typing-complete { animation: letterComplete .6s ease; }
+@keyframes typingCursor { 0%,48%{opacity:1} 49%,100%{opacity:0} }
+@keyframes letterComplete { 0%{transform:rotate(-.5deg) scale(.985)} 55%{transform:rotate(-.5deg) scale(1.012)} 100%{transform:rotate(-.5deg) scale(1)} }
+@media (prefers-reduced-motion: reduce) {
+  .flower-petal,.flower-sparkle,.letter-paper.typing::after { animation-duration:.01ms!important; animation-iteration-count:1!important; }
+  .main-button,.sub-button { transition-duration:.01ms!important; }
 }
 
 
