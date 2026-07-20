@@ -37,6 +37,10 @@ const nextPhotoButton = document.getElementById("nextPhotoButton");
 const creditButton = document.getElementById("creditButton");
 const envelope = document.getElementById("envelope");
 const replayButton = document.getElementById("replayButton");
+const letterPaper = document.getElementById("letterPaper");
+const typewriterTargets = Array.from(document.querySelectorAll(".typewriter-target"));
+const typewriterOriginalTexts = typewriterTargets.map((element) => element.innerText.trim());
+let typewriterRunId = 0;
 
 let audioContext = null;
 let analyser = null;
@@ -180,78 +184,48 @@ function wait(milliseconds) {
   花びら演出
 */
 function createConfetti(pieceCount = 55) {
-  const petalColors = [
-    "#ffd1df",
-    "#ffb8cf",
-    "#f48fb1",
-    "#fff4f7",
-    "#e86a9b"
+  const petalColors = ["#ffd8e4", "#ffc2d5", "#f6a5c1", "#fff5f8", "#ea7da8", "#d95489"];
+  const petalShapes = [
+    "75% 25% 70% 30% / 70% 35% 65% 30%",
+    "65% 35% 78% 22% / 58% 38% 62% 42%",
+    "82% 18% 62% 38% / 72% 44% 56% 28%"
   ];
 
-  for (
-    let index = 0;
-    index < pieceCount;
-    index += 1
-  ) {
+  for (let index = 0; index < pieceCount; index += 1) {
     const petal = document.createElement("span");
+    const width = 11 + Math.random() * 14;
+    const scale = .78 + Math.random() * .48;
+    const direction = Math.random() < .5 ? -1 : 1;
+    const sway = 24 + Math.random() * 78;
+    const drift = direction * (50 + Math.random() * 180);
+    const startRotation = Math.floor(Math.random() * 180);
+    const rotationAmount = direction * (520 + Math.random() * 760);
 
     petal.className = "flower-petal";
-
-    petal.style.left =
-      `${Math.random() * 100}vw`;
-
-    petal.style.backgroundColor =
-      petalColors[
-        Math.floor(
-          Math.random() * petalColors.length
-        )
-      ];
-
-    const size =
-      10 + Math.random() * 12;
-
-    petal.style.width =
-      `${size}px`;
-
-    petal.style.height =
-      `${size * 0.72}px`;
-
-    petal.style.animationDuration =
-      `${4.5 + Math.random() * 3.5}s`;
-
-    petal.style.animationDelay =
-      `${Math.random() * 0.9}s`;
-
-    petal.style.setProperty(
-      "--petal-drift",
-      `${-160 + Math.random() * 320}px`
-    );
-
-    petal.style.setProperty(
-      "--petal-sway",
-      `${20 + Math.random() * 50}px`
-    );
-
-    petal.style.setProperty(
-      "--petal-rotate",
-      `${360 + Math.random() * 720}deg`
-    );
+    petal.style.left = `${Math.random() * 100}vw`;
+    petal.style.width = `${width}px`;
+    petal.style.height = `${width * (.58 + Math.random() * .28)}px`;
+    petal.style.backgroundColor = petalColors[Math.floor(Math.random() * petalColors.length)];
+    petal.style.setProperty("--petal-duration", `${4.8 + Math.random() * 4.2}s`);
+    petal.style.setProperty("--petal-delay", `${Math.random() * 1.15}s`);
+    petal.style.setProperty("--petal-scale", scale.toFixed(2));
+    petal.style.setProperty("--petal-radius", petalShapes[Math.floor(Math.random() * petalShapes.length)]);
+    petal.style.setProperty("--petal-x1", `${direction * sway}px`);
+    petal.style.setProperty("--petal-x2", `${direction * sway * -.45}px`);
+    petal.style.setProperty("--petal-x3", `${direction * sway * .85}px`);
+    petal.style.setProperty("--petal-x4", `${drift}px`);
+    petal.style.setProperty("--petal-r0", `${startRotation}deg`);
+    petal.style.setProperty("--petal-r1", `${startRotation + rotationAmount * .22}deg`);
+    petal.style.setProperty("--petal-r2", `${startRotation + rotationAmount * .48}deg`);
+    petal.style.setProperty("--petal-r3", `${startRotation + rotationAmount * .73}deg`);
+    petal.style.setProperty("--petal-r4", `${startRotation + rotationAmount}deg`);
 
     document.body.appendChild(petal);
-
-    window.setTimeout(() => {
-      petal.remove();
-    }, 9000);
+    window.setTimeout(() => petal.remove(), 11000);
   }
 
-  createSparkles(
-    Math.max(
-      4,
-      Math.floor(pieceCount / 10)
-    )
-  );
+  createSparkles(Math.max(4, Math.floor(pieceCount / 12)));
 }
-
 
 /*
   キラキラ演出
@@ -296,6 +270,57 @@ function createSparkles(sparkleCount = 6) {
   }
 }
 
+
+/*
+  手紙のタイプライター表示
+*/
+function clearTypewriterText() {
+  typewriterRunId += 1;
+  letterPaper.classList.remove("typing", "typing-complete");
+  typewriterTargets.forEach((element) => { element.textContent = ""; });
+  replayButton.style.visibility = "hidden";
+}
+
+async function typeText(element, text, runId, characterDelay = 52) {
+  for (let index = 0; index < text.length; index += 1) {
+    if (runId !== typewriterRunId) return false;
+    element.textContent += text[index];
+    const character = text[index];
+    let delay = characterDelay;
+    if ("。！？".includes(character)) delay = 260;
+    else if (character === "、" || character === "\n") delay = 130;
+    await wait(delay);
+  }
+  return true;
+}
+
+async function startLetterTypewriter() {
+  clearTypewriterText();
+  const runId = typewriterRunId;
+  letterPaper.classList.add("typing");
+
+  for (let index = 0; index < typewriterTargets.length; index += 1) {
+    const completed = await typeText(
+      typewriterTargets[index],
+      typewriterOriginalTexts[index],
+      runId,
+      index === 0 ? 75 : 48
+    );
+    if (!completed) return;
+    await wait(index === 0 ? 380 : 520);
+  }
+
+  if (runId !== typewriterRunId) return;
+  letterPaper.classList.remove("typing");
+  letterPaper.classList.add("typing-complete");
+  replayButton.style.visibility = "visible";
+  createSparkles(7);
+}
+
+function openLetter() {
+  showScreen("message");
+  window.setTimeout(startLetterTypewriter, 450);
+}
 
 /*
   オープニング開始
@@ -914,6 +939,7 @@ function resetExperience() {
   addRoseButton.textContent =
     "🌹 バラを受け取る 🌹";
 
+  clearTypewriterText();
   showScreen("opening");
 }
 
@@ -980,18 +1006,32 @@ creditButton.addEventListener(
   startCredits
 );
 
-envelope.addEventListener(
-  "click",
-  () => {
-    showScreen("message");
+envelope.addEventListener("click", openLetter);
+envelope.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    openLetter();
   }
-);
+});
 
 replayButton.addEventListener(
   "click",
   resetExperience
 );
 
+
+/* ボタンを押したときの沈み込み */
+document.querySelectorAll(".main-button, .sub-button").forEach((button) => {
+  const releaseButton = () => button.classList.remove("button-pressed");
+  button.addEventListener("pointerdown", () => {
+    if (!button.disabled) button.classList.add("button-pressed");
+  });
+  button.addEventListener("pointerup", releaseButton);
+  button.addEventListener("pointercancel", releaseButton);
+  button.addEventListener("pointerleave", releaseButton);
+});
+
+clearTypewriterText();
 
 /*
   ページを閉じるときにマイクと動画を停止
