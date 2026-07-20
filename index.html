@@ -20,58 +20,39 @@
   <main id="app">
 
     <!-- オープニング -->
-    <section
-      id="openingScreen"
-      class="screen active dark-screen"
-    >
+    <section id="openingScreen" class="screen active dark-screen">
       <div class="stars"></div>
 
-      <p class="chapter-label">
-        A SPECIAL DAY
-      </p>
+      <p class="chapter-label">A SPECIAL DAY</p>
 
       <h1 class="opening-title">
         Happy Birthday
       </h1>
 
-      <p class="opening-age">
-        27
-      </p>
+      <p class="opening-age">27</p>
 
       <p class="opening-name">
         For なーちゃん
       </p>
 
-      <button
-        id="startButton"
-        class="main-button"
-      >
+      <button id="startButton" class="main-button">
         物語を始める ▶
       </button>
     </section>
 
 
     <!-- ケーキ -->
-    <section
-      id="cakeScreen"
-      class="screen cake-screen"
-    >
+    <section id="cakeScreen" class="screen cake-screen">
       <div class="cake-card">
-
-        <p class="cake-chapter">
-          CHAPTER 1
-        </p>
+        <p class="cake-chapter">CHAPTER 1</p>
 
         <h2 class="cake-heading">
           ✨ 願いごとしてね！ ✨
         </h2>
 
-        <p
-          id="cakeInstruction"
-          class="cake-description"
-        >
+        <p id="cakeInstruction" class="cake-description">
           「マイクをオン」にして<br>
-          ふーってしてロウソク消してみてー 🎂
+          息を吹きかけてロウソク消してみてー 🎂
         </p>
 
         <div
@@ -97,18 +78,13 @@
         </div>
 
         <div class="sound-meter cake-meter">
-
           <div class="meter-track">
-            <div
-              id="meterFill"
-              class="meter-fill"
-            ></div>
+            <div id="meterFill" class="meter-fill"></div>
           </div>
 
           <p id="meterText">
             マイクはまだオフです
           </p>
-
         </div>
 
         <button
@@ -124,37 +100,24 @@
         >
           うまく消えないときはタップ
         </button>
-
       </div>
     </section>
 
 
     <!-- プレゼント -->
-    <section
-      id="giftScreen"
-      class="screen"
-    >
-      <p class="chapter-label">
-        CHAPTER 2
-      </p>
+    <section id="giftScreen" class="screen">
+      <p class="chapter-label">CHAPTER 2</p>
 
-      <h2>
-        もう一個プレゼントあげる
-      </h2>
+      <h2>もう一個プレゼントあげる</h2>
 
       <p class="description">
         箱開けてみて！
       </p>
 
-      <div
-        id="giftBox"
-        class="gift-box"
-      >
+      <div id="giftBox" class="gift-box">
         <div class="gift-lid">
           <div class="ribbon-horizontal"></div>
-          <div class="ribbon-bow">
-            🎀
-          </div>
+          <div class="ribbon-bow">🎀</div>
         </div>
 
         <div class="gift-body">
@@ -162,307 +125,195 @@
         </div>
       </div>
 
-      <p
-        id="giftMessage"
-        class="gift-message"
-      >
-      </p>
+      <p id="giftMessage" class="gift-message">🎁</p>
     </section>
 
 
-    <!-- バラ -->
-    <section
-      id="roseScreen"
-      class="screen rose-screen"
-    >
-      <p class="chapter-label">
-        CHAPTER 3
+    <!-- バラ：🌹を1本ずつ追加 -->
+    <section id="roseScreen" class="screen rose-screen">
+      <p class="chapter-label">CHAPTER 3</p>
+
+      <h2>バラを受け取ってね</h2>
+
+      <p id="roseMessage" class="rose-message">
+        1本ずつ気持ちを込めて作ってみた
       </p>
 
-      <h2>
-        バラを受け取ってね
-      </h2>
-
-      <p
-        id="roseMessage"
-        class="rose-message"
-      >
-        1本ずつ気持ち込めて作ってみた
-      </p>
-
-      <div
-        id="roseCount"
-        class="rose-count"
-      >
+      <div id="roseCount" class="rose-count">
         0 / 27
       </div>
 
       <div
         id="roseGarden"
         class="rose-garden"
+        aria-live="polite"
       ></div>
 
-      <button
-        id="addRoseButton"
-        class="main-button"
-      >
+      <button id="addRoseButton" class="main-button">
         🌹 バラを受け取る 🌹
       </button>
     </section>
 
 
-    <!-- 花束 -->
-    <section
-      id="bouquetScreen"
-      class="screen"
-    >
-      <p class="chapter-label">
-        CHAPTER 4
-      </p>
+    <!-- 花束：生成した花束画像を1枚表示 -->
+    <section id="bouquetScreen" class="screen bouquet-screen">
+      <p class="chapter-label">CHAPTER 4</p>
 
-      <h2>
-        花束が完成しました
-      </h2>
+      <h2>花束が完成しました</h2>
 
-<div class="bouquet">
-  <img
-    src="images/bouquet.png"
-    alt="27本の赤いバラの花束"
-    class="bouquet-image"
-  >
-</div>
-        </div>
-
+      <div class="bouquet">
+        <img
+          src="images/bouquet.png"
+          alt="27本の赤いバラの花束"
+          class="bouquet-image"
+        >
       </div>
 
       <p class="bouquet-message">
         27歳の誕生日おめでとう！<br>
-        ほんまにいつも感謝してるよー
+        いつもほんまに感謝してるよ！
       </p>
 
-      <button
-        id="photoButton"
-        class="main-button"
-      >
+      <button id="photoButton" class="main-button">
         思い出を見る 📷
       </button>
     </section>
 
 
-    <!-- 写真・動画 -->
-    <section
-      id="photoScreen"
-      class="screen photo-screen"
-    >
-      <p class="chapter-label">
-        CHAPTER 5
-      </p>
+    <!-- 写真 -->
+    <section id="photoScreen" class="screen photo-screen">
+      <p class="chapter-label">CHAPTER 5</p>
 
-      <h2>
-        ふたりの思い出
-      </h2>
+      <h2>ふたりの思い出</h2>
 
       <div class="photo-frame">
         <img
           id="memoryPhoto"
-          src=""
+          src="images/photo1.jpg"
           alt="ふたりの思い出"
         >
       </div>
 
-      <p
-        id="photoCaption"
-        class="photo-caption"
-      ></p>
+      <p id="photoCaption" class="photo-caption"></p>
 
-      <div
-        id="photoProgress"
-        class="photo-progress"
-      ></div>
+      <div id="photoProgress" class="photo-progress"></div>
 
-      <button
-        id="nextPhotoButton"
-        class="main-button"
-      >
+      <button id="nextPhotoButton" class="main-button">
         次の写真へ →
       </button>
     </section>
 
 
     <!-- ラスト -->
-    <section
-      id="finalScreen"
-      class="screen final-screen dark-screen"
-    >
+    <section id="finalScreen" class="screen final-screen dark-screen">
       <div class="stars"></div>
 
-      <p class="chapter-label">
-        FINAL CHAPTER
-      </p>
+      <p class="chapter-label">FINAL CHAPTER</p>
 
       <h1 class="final-title">
         Happy Birthday
       </h1>
 
-      <div class="final-age">
-        27
-      </div>
+      <div class="final-age">27</div>
 
       <p class="final-message">
         27歳も笑顔いっぱいで<br>
         幸せな一年になりますように<br><br>
 
         これからも一緒に<br>
-        たくさん思い出作ろな<br><br>
+        たくさん思い出作ろうね。<br><br>
 
-        大好きやで ✨
+        大好きやで✨
       </p>
 
-      <button
-        id="creditButton"
-        class="main-button"
-      >
+      <button id="creditButton" class="main-button">
         エンドロールを見る 🎬
       </button>
     </section>
 
 
     <!-- エンドロール -->
-    <section
-      id="creditScreen"
-      class="screen credit-screen dark-screen"
-    >
+    <section id="creditScreen" class="screen credit-screen dark-screen">
       <div class="credit-roll">
+        <p>HAPPY BIRTHDAY</p>
 
-        <p>
-          HAPPY BIRTHDAY
-        </p>
-
-        <h2>
-          なーちゃん
-        </h2>
+        <h2>なーちゃん</h2>
 
         <div class="credit-space"></div>
 
-        <p>
-          CAST
-        </p>
-
-        <h3>
-          ぽん
-        </h3>
-
-        <h3>
-          ぷん
-        </h3>
+        <p>CAST</p>
+        <h3>ぽん</h3>
+        <h3>ぷん</h3>
 
         <div class="credit-space"></div>
 
-        <p>
-          SPECIAL THANKS
-        </p>
-
-        <h3>
-          Our Memories
-        </h3>
-
-        <h3>
-          Our Future
-        </h3>
+        <p>SPECIAL THANKS</p>
+        <h3>Our Memories</h3>
+        <h3>Our Future</h3>
 
         <div class="credit-space"></div>
 
-        <p>
-          CREATED BY
-        </p>
-
-        <h3>
-          たくと
-        </h3>
+        <p>CREATED BY</p>
+        <h3>たくと</h3>
 
         <div class="credit-space"></div>
 
-        <h1>
-          END
-        </h1>
-
+        <h1>END</h1>
       </div>
     </section>
 
 
     <!-- 最後の手紙 -->
-    <section
-      id="letterScreen"
-      class="screen letter-screen"
-    >
-      <p class="chapter-label">
-        ONE MORE THING...
-      </p>
+    <section id="letterScreen" class="screen letter-screen">
+      <p class="chapter-label">ONE MORE THING...</p>
 
-      <div
-        id="envelope"
-        class="envelope"
-      >
+      <div id="envelope" class="envelope">
         <div class="envelope-back"></div>
-
-        <div class="letter-preview">
-          💌
-        </div>
-
+        <div class="letter-preview">💌</div>
         <div class="envelope-front"></div>
       </div>
 
       <p class="description">
-        手紙も読んでみて！
+        手紙も読んでね！
       </p>
     </section>
 
 
-    <!-- 最後のメッセージ -->
-    <section
-      id="messageScreen"
-      class="screen"
-    >
-      <p class="chapter-label">
-        A LETTER FOR YOU
-      </p>
+    <section id="messageScreen" class="screen">
+      <p class="chapter-label">A LETTER FOR YOU</p>
 
-      <div class="letter-paper">
+      <div
+        id="letterPaper"
+        class="letter-paper"
+      >
+        <h2>なーちゃんへ</h2>
 
-        <h2>
-          なーちゃんへ
-        </h2>
-
-        <p>
+        <p class="typewriter-target">
           最後まで見てくれてありがとう！
         </p>
 
-        <p>
+        <p class="typewriter-target">
           あまり会える時間も機会も少ないけど<br>
           27歳の一年が<br>
-          笑顔と幸せでいっぱいになるように一緒に居ろうな！
+          笑顔と幸せでいっぱいになるように一緒に居ろうね！
         </p>
 
-        <p>
+        <p class="typewriter-target">
           一緒に過ごせる時間<br>
           これからも大切にしていくな！
         </p>
 
-        <p>
+        <p class="typewriter-target">
           改めて<br>
-          お誕生日おめでとう 🎂
+          お誕生日おめでとう🎂
         </p>
 
-        <p class="letter-sign">
+        <p class="letter-sign typewriter-target">
           大好きやで 💝
         </p>
-
       </div>
 
-      <button
-        id="replayButton"
-        class="main-button"
-      >
+      <button id="replayButton" class="main-button">
         もう一回見る
       </button>
     </section>
