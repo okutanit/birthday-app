@@ -8,7 +8,8 @@ const screens = {
   final: document.getElementById("finalScreen"),
   credit: document.getElementById("creditScreen"),
   letter: document.getElementById("letterScreen"),
-  message: document.getElementById("messageScreen")
+  message: document.getElementById("messageScreen"),
+  closing: document.getElementById("closingScreen")
 };
 
 const startButton = document.getElementById("startButton");
@@ -37,6 +38,7 @@ const nextPhotoButton = document.getElementById("nextPhotoButton");
 const creditButton = document.getElementById("creditButton");
 const envelope = document.getElementById("envelope");
 const replayButton = document.getElementById("replayButton");
+const closingReplayButton = document.getElementById("closingReplayButton");
 const letterPaper = document.getElementById("letterPaper");
 const typewriterTargets = Array.from(document.querySelectorAll(".typewriter-target"));
 const typewriterOriginalTexts = typewriterTargets.map((element) => element.innerText.trim());
@@ -405,6 +407,48 @@ function createSparkles(sparkleCount = 6) {
 }
 
 
+
+function resetClosingScreen() {
+  const closingScreen = screens.closing;
+
+  if (!closingScreen) {
+    return;
+  }
+
+  closingScreen.classList.remove(
+    "show-title",
+    "show-name",
+    "show-signature",
+    "show-replay"
+  );
+}
+
+function showClosingScreen() {
+  resetClosingScreen();
+  showScreen("closing");
+
+  window.setTimeout(() => {
+    screens.closing?.classList.add("show-title");
+  }, 250);
+
+  window.setTimeout(() => {
+    screens.closing?.classList.add("show-name");
+  }, 1250);
+
+  window.setTimeout(() => {
+    screens.closing?.classList.add("show-signature");
+  }, 3150);
+
+  window.setTimeout(() => {
+    createConfetti(15);
+  }, 4000);
+
+  window.setTimeout(() => {
+    screens.closing?.classList.add("show-replay");
+  }, 5200);
+}
+
+
 /*
   手紙のタイプライター表示
 */
@@ -447,8 +491,14 @@ async function startLetterTypewriter() {
   if (runId !== typewriterRunId) return;
   letterPaper.classList.remove("typing");
   letterPaper.classList.add("typing-complete");
-  replayButton.style.visibility = "visible";
+  replayButton.style.visibility = "hidden";
   createSparkles(7);
+
+  await wait(2000);
+
+  if (runId !== typewriterRunId) return;
+
+  showClosingScreen();
 }
 
 function openLetter() {
@@ -1074,6 +1124,7 @@ function resetExperience() {
     "🌹 バラを受け取る 🌹";
 
   clearTypewriterText();
+  resetClosingScreen();
   showScreen("opening");
 }
 
@@ -1149,6 +1200,11 @@ envelope.addEventListener("keydown", (event) => {
 });
 
 replayButton.addEventListener(
+  "click",
+  resetExperience
+);
+
+closingReplayButton?.addEventListener(
   "click",
   resetExperience
 );

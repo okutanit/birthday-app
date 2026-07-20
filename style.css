@@ -1345,3 +1345,179 @@ font-family: "Zen Maru Gothic", sans-serif;
     max-height: 380px !important;
   }
 }
+
+/* ========================================
+   本当のラスト
+======================================== */
+
+.closing-screen {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(87, 54, 108, 0.34),
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      #120d18 0%,
+      #09060e 100%
+    );
+}
+
+.closing-message-wrap {
+  position: relative;
+  z-index: 4;
+
+  width: min(88vw, 620px);
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.closing-title,
+.closing-name,
+.closing-signature,
+.closing-replay-button {
+  opacity: 0;
+}
+
+.closing-title {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(2.35rem, 9vw, 5rem);
+
+  font-weight: 500;
+  letter-spacing: 0.04em;
+
+  color: #fff8fb;
+
+  text-shadow:
+    0 0 18px
+    rgba(255, 220, 235, 0.24);
+
+  transform:
+    translateY(20px)
+    scale(0.98);
+}
+
+.closing-name {
+  margin: 20px 0 0;
+
+  font-size:
+    clamp(1.65rem, 6.5vw, 3rem);
+
+  letter-spacing: 0.12em;
+
+  color: #f4c6d9;
+
+  transform:
+    translateY(18px);
+}
+
+.closing-signature {
+  margin-top: 42px;
+
+  color:
+    rgba(255, 246, 250, 0.78);
+
+  font-size:
+    clamp(0.92rem, 3.8vw, 1.1rem);
+
+  line-height: 1.75;
+  letter-spacing: 0.08em;
+
+  transform:
+    translateY(14px);
+}
+
+.closing-signature p {
+  margin: 0;
+}
+
+.closing-replay-button {
+  margin-top: 38px;
+
+  transform:
+    translateY(14px);
+}
+
+.closing-screen.show-title
+.closing-title {
+  animation:
+    closingFadeUp
+    1.55s
+    cubic-bezier(.22, .9, .26, 1)
+    forwards;
+}
+
+.closing-screen.show-name
+.closing-name {
+  animation:
+    closingFadeUp
+    1.35s
+    cubic-bezier(.22, .9, .26, 1)
+    forwards;
+}
+
+.closing-screen.show-signature
+.closing-signature {
+  animation:
+    closingFadeUp
+    1.25s
+    ease
+    forwards;
+}
+
+.closing-screen.show-replay
+.closing-replay-button {
+  animation:
+    closingFadeUp
+    1s
+    ease
+    forwards;
+}
+
+@keyframes closingFadeUp {
+  0% {
+    opacity: 0;
+
+    transform:
+      translateY(20px)
+      scale(0.985);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .closing-message-wrap {
+    width: 88vw;
+  }
+
+  .closing-title {
+    line-height: 1.08;
+  }
+
+  .closing-signature {
+    margin-top: 34px;
+  }
+
+  .closing-replay-button {
+    margin-top: 30px;
+  }
+}
