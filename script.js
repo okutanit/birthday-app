@@ -130,27 +130,27 @@ const photos = [
   {
     type: "image",
     src: "images/IMG_6404.jpg",
-    caption: "シールいっぱい集めよー"
+    caption: "シール集めまた今後したいなー🍊🍎"
   },
   {
     type: "image",
     src: "images/IMG_6392.jpg",
-    caption: "この写真かわいい"
+    caption: "この写真かわいい✨"
   },
   {
     type: "video",
     src: "images/IDFJ5899.mp4",
-    caption: "一緒におれて楽しかった！"
+    caption: "この時も楽しかった📖"
   },
   {
     type: "video",
     src: "images/BNFF6892.mp4",
-    caption: "これからも色んなところ行こな"
+    caption: "いろんな温泉いこー♨️"
   },
   {
     type: "video",
     src: "images/UHBP2581.mp4",
-    caption: "これからもいっぱい思い出作ろー"
+    caption: "これからもいっぱい思い出作ろねー✨"
   }
 ];
 
